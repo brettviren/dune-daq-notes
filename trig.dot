@@ -1,0 +1,108 @@
+digraph trig {
+        //        rankdir=LR;
+        label="DUNE Hierarchical Trigger System (two 10kt detector modules shown)";
+        
+        node [style="rounded,filled",color=black,shape=box,fillcolor=white];
+        graph [style=filled, splines=true, overlap=false];
+        edge[color=purple]
+        snews[label="SNEWS"];
+        subgraph cluster_daq {
+                label="DUNE DAQ";
+                graph[color=white];
+
+        subgraph cluster_global {
+                label="Global Triggering";
+                graph[color=slategray2];
+                gt[shape=diamond,label="Global\ntrigger logic"];
+                beam[label="Beam Spill\nInformation"];
+                extern[label="Global\nExternal"]
+        }
+        subgraph cluster_module1 {
+                label="Detector Module 1";
+                labelloc=bottom;
+                graph[color=slategray2];
+                subgraph cluster_submod1 {
+                        graph[color=slategray3];
+                        label="Detector submodule (eg APA)";
+                        {
+                                rank=same
+                                trigsrc1[label="Self-trigger\nprimitive"];
+                                readout1[shape=octagon,label="Apply Trigger\nCommand"];
+                                test1[shape=diamond, label="Local\nTest"];
+                        }
+                }
+                {rank=same
+                        modext1[label="Module Level\nExternal"];
+                        mt1[shape=diamond, label="Module 1\ntrigger logic"];
+                }
+        }
+        subgraph cluster_module2 {
+                labelloc=bottom;
+                label="Detector Module 2";
+                graph[color=slategray2];
+                subgraph cluster_submod2 {
+                        graph[color=slategray3];
+                        label="Detector submodule (eg APA)";
+                        {
+                                rank=same;
+                                trigsrc2[label="Self-trigger\nprimitive"];
+                                readout2[shape=octagon,label="Apply Trigger\nCommand)"];
+                                test2[shape=diamond, label="Local\nTest"];
+                        }
+                }
+                {rank=same 
+                        mt2[shape=diamond, label="Module 2\ntrigger logic"];
+                        modext2[label="Module Level\nExternal"]
+                }
+        }
+        subgraph cluster_legend {
+                label="";
+                graph[color=white];
+                node[shape=point];
+                subgraph cluster_l1 {
+                        p1->p3[label="trigger\n command",style=solid];
+
+                }                        
+                subgraph cluster_l2 {
+                        p2->p4[label="trigger\n primitive",style=dashed,dir=back];
+                }
+        }
+}
+        // trigger primitives
+        edge[style=dashed];
+        
+        beam->gt;
+        extern->gt;
+        
+        mt1->modext1[dir=back];
+        mt2->modext2[dir=back];
+        
+        mt1->trigsrc1[dir=back];
+        mt2->trigsrc2[dir=back];
+
+        mt1->gt[];
+        mt2->gt[];
+        
+//        p4->p2[label="trigger\nprimitive"];
+
+
+        snews->gt[weight=2];
+
+
+        // trigger commands
+        edge[style=solid];
+        gt->snews[weight=0];
+        
+        gt:sw->mt1[weight=2];
+        gt:se->mt2[weight=3];
+        mt1->readout1;
+        mt2->readout2;
+
+        test1->readout1;
+        test2->readout2;
+
+        mt1->test1[style=invis];
+        mt2->test2[style=invis];
+        
+        edge[style=invis];
+}

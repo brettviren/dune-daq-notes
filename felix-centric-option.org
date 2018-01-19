@@ -1,0 +1,91 @@
+#+title: FELIX-based DUNE FD DAQ Option
+#+author: DUNE DAQ Consortium
+#+LATEX_HEADER: \usepackage[margin=1.0in]{geometry}
+
+* Introduction
+
+This is an addendum to the note "DUNE Far Detector Baseline Trigger
+System and Single-Phase DAQ".  It describes a design which is
+considered an option compared to what is presented there.  If this
+option gains acceptance it is expected this text will provide some
+fodder for the DAQ section of the Single-Phase volume of the DUNE
+Technical Proposal.
+
+* Design Option
+
+The design is depicted in Fig. [[fig:felix]].  In this option, data is
+directly transmitted from the WIBs to the FELIX PCIe board and the
+pipelines are moved partly into the FELIX FPGA and partly into threads
+running on the host computer CPU with optional possibility to exploit
+hardware acceleration using GPU.
+
+
+#+caption: The Single-Phase Direct-FELIX option.  See text.
+#+name: fig:felix
+[[./felix-fpga.pdf]]
+
+The link between WIBs and DAQ front end will use fewer but higher
+bandwidth links to better utilize FELIX capability.  The additional
+WIB FPGA capacity to support this link speed is expected to require a
+small increment over what is already needed to satisfy other
+requirements (eg local diagnostics, cold electronics power
+distribution and control, timing system interface) not directly
+related to DAQ so is not expected to be a cost driver for the Cold
+Electronics.
+
+After FELIX receives and formats data from all 2560 channels it will
+stream the results via DMA into the main ring buffer provided by the
+host computer.  Meanwhile and like the baseline design, the 960
+collection channels will enter processing pipelines running on the
+FELIX FPGA, the host CPUs and optionally on GPU accelerators.
+
+The exact makeup of the algorithms which run in each context need
+study and optimization.  It is noted that commodity multi-CPU host
+computers can be equipped with forty or more threads today.  This high
+thread count allows multiple threads per pipeline and multiple
+parallel pipelines.  To exploit these high thread counts the
+collection channel data may be segmented even further than the
+quartering called for by the baseline design.  A natural minimum
+grouping would aggregating 48 channels per each FEMB into each
+pipeline.  There is flexibility to trade off the number of parallel
+pipelines against their depth.
+
+Figure [[fig:trigpipe]] illustrates one conceptual data flow pipeline for
+producing trigger primitives.  This pipeline may be partly implemented
+in the FELIX FPGA and partly as CPU threads.  The input is an
+N-channel vector (with N as just discussed) covering one tick of
+contiguous collection channels.  The use of this unit of data
+minimizes buffering latency and its associated RAM needs and supports
+streaming algorithms which may exploit SIMD optimization.
+
+#+caption: One conceptual pipeline for forming trigger primitives.  See text.
+#+attr_latex: :width 8cm
+#+name: fig:trigpipe
+[[./pipeline.pdf]]
+
+
+In the figure, the /baseline/ node maintains a rolling estimate for
+the waveform baseline from each of the N-channels.  It must be
+calculated in such a way that it may respond to recent baseline drifts
+or low frequency noise while not being pulled by signal nor be
+strongly influenced by waveform samples from the distant past.  Among
+other possibilities, a streamed median or streamed mode algorithm
+applied to a buffered window or with periodic reset will be
+investigated.
+
+Besides feeding the baseline accumulator node, each N-channel /input/
+vector is subtracted from the current baseline vector and the result
+is passed to the rolling RMS accumulator.  The RMS provides a measure
+of the recent noise level on each channel.  Like the baseline it must
+emphasize recent measurements and not be dominated by past history.
+
+The baseline subtracted N-channel vector and the associated RMS vector
+are then compared to determine which, if any, channels are currently
+above a threshold.  The threshold may be derived as some factor
+multiplied to the RMS vector.  The /time-over-threshold/ node
+maintains two N-channel vectors.  The first accumulates the number of
+ticks each channel has been over threshold and the second the sum of
+ADC in those ticks.  When a particular channel returns below threshold
+the node resets its entries in these two vectors and sends their
+values to the subsequent and final node which uses them to form and
+emit a trigger primitive message.

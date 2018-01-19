@@ -1,0 +1,199 @@
+#+TITLE: DUNE Far Detector Baseline @@latex:\\@@ Trigger System and Single-Phase DAQ
+#+AUTHOR: DUNE DAQ Consortium
+#+LATEX_HEADER: \usepackage[margin=1.0in]{geometry}
+* Introduction
+
+This document briefly describes refinements to the ``DAQ baseline
+dataflow'' diagram presented at the [[https://indico.fnal.gov/event/15953/][14 Dec 2017 DAQ Consortium PI
+meeting]].  It separates the information into the following diagrams:
+
+1) The DUNE Hierarchical Trigger Concept
+2) Single-Phase DAQ High-Level Functional Blocks
+3) Baseline Single-Phase DAQ Data and Trigger Flow
+
+The first provides a view of just the trigger information flow for the
+entire DUNE far detector up to the 10kt module level.  The second
+provides a general description of the functional blocks needed.  The
+third represents a specific baseline design mapping functional blocks
+to hardware and software implementations.
+
+The remaining sections present and explain each diagram in some
+detail.  This document represents proposed refinements however the
+text is written in prescriptive, specifying terms.  It is expected
+some names must change in order to be coherent with other
+descriptions.  This note is in draft form and is expected to be
+revised to synchronize with all the ideas from across the consortium.
+If acceptable by the consortium, it is hoped the text can be used in
+part for the Technical Proposal.
+
+* Hierarchical Trigger System
+
+#+caption: The DUNE hierarchical trigger system concept.  See text.
+#+name: fig:trigger
+[[./trig.pdf]]
+
+The DUNE far detector trigger system, diagrammed in Fig. [[fig:trigger]] is
+composed as a hierarchy of layers.  At the top is global triggering
+which governs the far detector as a whole through a single Global
+Trigger Logic (GTL) unit.  The layer below holds module triggering
+with a Module Trigger Logic (MTL) unit for each 10 kt detector module.
+Finally, the bottom-most layer holds units specific to the make up of
+each 10kt module which produce /trigger primitive/ (dashed lines) and
+consume /trigger command/ (solid lines) messages.
+
+A /trigger primitive message/ (TPM) represents a declaration that some
+activity of interest may have occurred.  Its information is in terms
+of a period of time associated with the activity, a spatial context,
+an enumerated identifier indicating the type of activity and
+additional type-specific information.  TPMs are emitted by sub-module
+processes (labeled ``pipelines'' in Sec. [[Functional Blocks]]), by MTL units and by other
+sources inside or external to the DAQ.
+
+A detector sub-module's TPMs are consumed by its MTL unit.  These TPMs
+may follow a format convention specific to that sub-module.  The MTL
+unit may interpret them and generate global TPMs which the GTL will
+consume.
+
+While a TPM moves generally ``up'' through the trigger hierarchy
+toward the GTL, a /trigger command message/ (TCM) moves ``down''
+toward detector module DAQ for final exection.  In general, a TCM
+species a period of time and an extent of the detector which is to be
+recorded and in a prescribed manner.
+
+The TPMs which are emitted by the GTL unit follow some convention (to
+be determined) in terms of how the time period and module addressing
+information is structured.  The MTL units consume a global TCM and
+interpret and translate it into a form that follows a module-specific
+convention.  The MTL unit then forwards this to the appropriate
+sub-module DAQ partitions for final execution.
+
+Also allowed is 
+
+The diagram shows a non-exhaustive set of example sources of TPMs.
+The external sources of TPM include:
+
+- Beam Spill Network Packet :: this holds the time information for
+     recent beam as sent from Fermilab.
+- Global External :: this represents any external trigger such as a
+     minimum bias, a trigger from calibration source, etc.
+- SNEWS :: this represents the possibility of *receiving* a trigger
+           from the SuperNova Early Warning System so that the
+           detector may acquire data covering when a far away
+           supernova burst (SNB) have occurred
+Module-level sources of TPM are expected to include:
+
+- Self-trigger :: each 10 kt module must raise primitives when significant
+                  activity occurs in the LAr
+- External :: a local external primitive may be formed, for example
+              from a calibration device
+
+
+
+* Functional Blocks
+
+#+caption: The high-level function blocks required for the Single-Phase DAQ.  See text.
+#+name: fig:blocks
+[[./sphil.pdf]]
+
+The high-level functional blocks required to be implemented by the
+Single-Phase DAQ are shown in Fig. [[fig:blocks]] for two out of the 150
+APAs.  The diagram presents the data and trigger flow between the
+blocks.  The blocks do not directly represent hardware design and
+implementation information.  They are mapped to that level of detail
+in the following sections.  Anticipating those designs, optional data
+paths are represented by dotted lines.
+
+The thickness of the lines of data flow indicate approximately the
+amount of throughput required along their paths.  The lines of
+triggering follow the same convention as in Fig. [[fig:trigger]].
+
+
+Data enters the DAQ from the collection of WIBs servicing the associated
+APA.  This input data rate is at least 80 Gbps (10 GByte/sec).  It is
+accepted by a Front End Data Receiver.  The data may optionally
+undergo lossless compression at this point.  The full data is sent
+into a RAM-based ring buffer maintained to retain at least 10 seconds
+of data from the recent past.  
+
+Either from this buffer or directly from the Front End, data from the
+960 collection channels are sent into a Trigger Primitive Production
+Pipeline.  Although represented here as a single box, it is likely
+implemented as a number of parallel pipelines potentially running on a
+variety of hardware.  The job of the pipeline is to emit a TPM derived
+from the TPC data itself to the Single-Phase MTL unit.  
+
+Any TCM sent back from this MTL unit must be accepted by the Apply
+Trigger Command (ATC) unit.  As shown in Fig. fig:trigger, the ATC may
+also accept TCM from Local Test trigger logic.  The ATC may order,
+merge or otherwise interpret its input TCMs in order to execute them
+on the Buffer Extraction Process (BEP).
+
+The BEP extracts selected data from the ring buffer and transfers it
+to other buffers depending on instruction in the trigger command.  The
+BEP is also responsible for draining the ring buffer and thus must
+drop but warn (labeled "=LATE=" in the diagram) any trigger commands
+which arrive after the required data has been popped out of the ring
+buffer.  Nominally, the extracted data is expected to be sent to the
+Selection Buffer but additional buffers may be used for special
+purposes.  The SNB Dump Buffer will hold the full-rate data given a
+SNB trigger command.  It may be implemented in RAM or SSD depending on
+technical design details.  It is expected to be filled rarely and
+drained slowly.  It must be constructed so that it does not negatively
+impact nominal data taking.  Other types of buffers may be implemented
+as needed under this same criteria.
+
+Buffered data is pushed to the "Data Output which sends it into
+the Egress Process System (EPS). This system is responsible for
+eventually writing data to file at the point where responsibility for
+the data is handed off to the Offline group.  The EPS must accept data
+from all sub-module fragments in a 10 kt module and from all 10 kt
+modules.  It may collate data across the fragments which are nearby in
+time into "events" and it may apply further processing including lossy
+reduction or lossless compression.  Note, at some point when the
+design for the DAQ is better understood a more detailed description at
+the scale of this document is needed to direct the development of the
+EPS.
+
+* Baseline Data and Trigger Flow
+
+#+caption: The Single-Phase proposed baseline data and trigger flow.  See text.
+#+name: fig:baseline
+[[./rce-felix-hybrid.pdf]]
+
+A baseline data and trigger flow diagram is shown in
+Fig. [[fig:baseline]].  It is similar to the functional blocks diagram of
+Fig. [[fig:blocks]] but it associates specific blocks with specific
+technological implementations.  The diagram abbreviates the initial
+input and final output blocks and omits the monitoring elements.
+
+Data enters an APA DAQ fragment from the associated APA cold
+electronics via five WIBs.  A WIB has four groups of four 1 Gbps
+fibers.  The fibers from the same group on each WIB are fed to an RCE
+Front End Data Receiver.  This gives each RCE view of one quarter of
+the entire TPC wire data stream produced from a line of five cold
+Front End Mother Boards (FEMBs) on one APA face.  This stream fragment
+consists of the 240 channels associated with one half of one
+collection plane and the 400 induction plane channels which also
+reside on their FEMBs
+
+This quartered data then enters a processing pipeline running on each
+RCE.  The first stage of this pipeline applies data formatting and
+optional compression.  Its output from each RCE is sent through two 10
+Gbps fiber links to inputs on a FELIX PCIe board.  The data is
+reassembled into contiguous channels and ticks by the FELIX FPGA and
+transferred via DMA into a ring buffer sufficient to hold at least ten
+seconds.
+
+Meanwhile, each pipeline continues processing just the data from the
+240 collection channels.  The data is transformed in order to remove
+excess noise, determine regions of interest (ROI) and to emit
+associated trigger primitives messages as described in Section
+[[Hierarchical Trigger System]].  Also as discussed there a local ``fast''
+trigger command may be sent out for immediate consumption.
+
+Any trigger commands addressed and sent to the APA DAQ fragment are
+accepted by the ATC which, as needed, will then emit a local trigger
+command to the BEP and subsequent actions proceed as described in
+Sec. [[Functional Blocks]].
+
+

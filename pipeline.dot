@@ -1,0 +1,42 @@
+digraph pipeline {
+        node [style="rounded,filled",color=black,shape=box,fillcolor=white];
+        graph [style=filled, splines=line, overlap=false];
+        edge [color=gray40];
+        subgraph cluster_daq {
+                label="Single-Phase DAQ FPGA/CPU Pipeline";
+                //labelloc=bottom;
+                graph[color=white];                
+                trig[color=gray80,shape=diamond,label="Single-Phase\nModule-Level\nTrigger Logic"];
+                subgraph cluster_pipeline {
+                        label="Trigger Pipeline (FPGA & CPU)";
+
+                        graph[color=slategray2];
+
+                        entry[shape=point];
+                        input[label="input"];
+                        baseline[label="baseline\nrolling accumulation\n(local buffering)"];
+                        basesub[label="subtract\nbaseline"];
+                        rms[label="RMS\nrolling accumulation\n(local buffering)"];
+                        tot[label="Time over threhold\n(local buffering)"];
+                        tp[label="Emit trigger\nprimitive"];
+                        {rank=same baseline,basesub,rms}
+                }
+
+        }
+        edge [penwidth=4];
+        entry->input[label="  N-channel, 1-tick vector\n(intrinsic noise levels)"];
+        input->baseline;
+        input->basesub;
+        baseline->basesub;
+        basesub->rms;
+        basesub->tot;
+        rms->tot;
+
+        edge [penwidth=1];
+        tot->tp[label=" per-channel ROI"];
+
+        // trigger primitive
+        edge[color=gray80,penwidth=1,style=dashed];
+        tp->trig;
+        
+}

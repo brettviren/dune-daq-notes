@@ -1,0 +1,209 @@
+digraph hybrid {
+        node [style="rounded,filled",color=black,shape=box,fillcolor=white];
+        graph [style=filled, splines=line, overlap=false];
+        edge [color=gray40];
+
+        subgraph cluster_ce {
+                label="Cold Electronics";
+                graph[color=seashell3];
+                subgraph cluster_ceapa {
+                        label="APA i";
+                        graph[color=seashell];
+                        WIB[label="5 WIBs x\n4 connnectors"];
+                }
+        }
+
+        subgraph cluster_daq {
+                label="Single-Phase DAQ Baseline Data and Trigger Flow (1 APA shown)";
+                labelloc=bottom;
+                graph[color=black, style=solid];
+
+               trig[shape=diamond,label="Single-Phase\nModule-Level\nTrigger Logic"];
+                pds[label="APA i\nPDS"];
+
+                subgraph cluster_apa {
+                        label="One APA DAQ Partition";
+                        graph[style=solid, color=black];
+
+                        start[shape=triangle,label="RTM EO/OE\ndistribute to RCE by\nWIB connector#"];
+                        
+                        subgraph cluster_pp1 {
+                                label="Pre-Processing and Trigger Primitive Production";
+                                graph[style=filled, color=slategray2];                                
+                                subgraph cluster_pipe1 {
+                                        graph[color=slategray1];
+                                        label="RCE 1:\nTrigger Primitive\nProduction Pipeline";
+                                        fe1[label="Front End\nData Receiver"];
+
+                                        form1[label="format\ndata",group=fulldata];
+                                        groupch1[label="group\nchannels"];
+                                        noise1[label="noise\nmitigation"];
+                                        roi1[label="ROI\nfinding"];
+                                        tp1[label="trigger\nprimitives"];
+                                }
+
+                                subgraph cluster_pipe2 {
+                                        graph[color=slategray1];
+                                        label="RCE 2:\nTrigger Primitive\nProduction Pipeline";
+
+                                        fe2[label="Front End\nData Receiver"];
+                                        form2[label="format\ndata",group=fulldata];
+                                        groupch2[label="group\nchannels"];
+                                        noise2[label="noise\nmitigation"];
+                                        roi2[label="ROI\nfinding"];
+                                        tp2[label="trigger\nprimitives"];
+                                }
+                                subgraph cluster_pipe3 {
+                                        graph[color=slategray1];
+                                        label="RCE 3:\nTrigger Primitive\nProduction Pipeline";
+
+                                        fe3[label="Front End\nData Receiver"];
+                                        form3[label="format\ndata",group=fulldata];
+                                        groupch3[label="group\nchannels"];
+                                        noise3[label="noise\nmitigation"];
+                                        roi3[label="ROI\nfinding"];
+                                        tp3[label="trigger\nprimitives"];
+                                }
+                                subgraph cluster_pipe4 {
+                                        graph[color=slategray1];
+                                        label="RCE 4:\nTrigger Primitive\nProduction Pipeline";
+
+                                        fe4[label="Front End\nData Receiver"];
+                                        form4[label="format\ndata",group=fulldata];
+                                        groupch4[label="group\nchannels"];
+                                        noise4[label="noise\nmitigation"];
+                                        roi4[label="ROI\nfinding"];
+                                        tp4[label="trigger\nprimitives"];
+                                }
+                        }
+                        subgraph cluster_df {
+                                label="Trigger Execution, Data Buffering and Flow";
+                                graph[style=filled, color=slategray2];                                
+
+                                felix[label="FELIX",group=fulldata];
+                                buf[shape=circle,label="~10s RAM\nring buffer"];
+                                extraction[label="Buffer Extraction\nProcess"];
+                                snb[label="SNB dump\nbuffer\n(SSD/RAM)"];
+                                sel[label="Selection buffer\n(RAM)"];
+                                ro[shape=hexagon,label="Apply Trigger\nCommand"];
+                                br[label="Data\nOutput",group=artdaq];
+
+                                {rank=same felix, buf}
+                                {rank=same extraction, ro}
+                                {rank=same snb, sel}
+                        }
+                }
+                subgraph cluster_eb {
+                        label="Single-Phase\nEgress Processing\nSystem";
+                        graph[style=filled,color=slategray1];
+
+                        eb[label="Event Builder...",group=artdaq];
+                }
+        }
+        // Full data
+        edge[penwidth=8];
+
+        WIB->start[label="  80 x 1 Gbps fiber"];
+
+
+        start->felix;
+        felix->buf[label="full data volume\n(possibly compressed)"];
+        buf->extraction[label="pull\n  selected"];
+        extraction->snb;
+
+        
+        // collection plane data
+        edge[penwidth=4];
+
+
+        // reduced data
+        edge[penwidth=2]
+
+        extraction->sel;
+        sel->br[label="all non-SNB\ntriggered\ndata"];
+        
+        // per rece
+        edge[penwidth=2];
+        
+        start->fe1[label=" 15.4 Gbps"];
+        start->fe2[label=" 15.4 Gbps"];
+        start->fe3[label=" 15.4 Gbps"];
+        start->fe4[label=" 15.4 Gbps"];
+
+        fe1->form1;
+        fe2->form2;
+        fe3->form3;
+        fe4->form4;
+
+        edge[constraint=false];
+        form1->start;
+        form2->start;
+        form3->start;
+        form4->start;
+        edge[constraint=true];
+
+        //felix->form1[dir=back,weight=0.1];
+        //felix->form2[dir=back,weight=0.1];
+        //felix->form3[dir=back,weight=0.1];
+        //felix->form4[taillabel="2x 10 Gbps\nlinks from\neach pipeline", dir=back,weight=0.1];
+        
+
+        // per rce collection channel pipeline 
+        edge[penwidth=1];
+        form1->groupch1[label="240\ncollection\nchannels"];
+        form2->groupch2[label="240\ncollection\nchannels"];
+        form3->groupch3[label="240\ncollection\nchannels"];
+        form4->groupch4[label="240\ncollection\nchannels"];
+
+        groupch1->noise1->roi1->tp1;
+        groupch2->noise2->roi2->tp2;
+        groupch3->noise3->roi3->tp3;
+        groupch4->noise4->roi4->tp4;
+
+
+        // egress
+        edge[penwidth=2]
+        br->eb;
+
+
+
+        // trickle
+        edge[penwidth=1,style=solid];
+        snb->br[label="trickle\nout"];
+
+        
+
+        // trigger primitive
+        edge[color=purple,penwidth=1,style=dashed];
+
+        tp1->trig[constraint=false];
+        tp2->trig[constraint=false];
+        tp3->trig[constraint=false];
+        tp4->trig[constraint=false];
+
+        trig->pds[dir=back,taillabel="trigger\nprimitive"];
+       
+
+        // trigger command
+        edge[style=solid];
+
+        trig->ro[taillabel="trigger command",constraint=false];
+
+
+        ro->extraction[label="trigger\ncommand"];
+
+
+        // tp1->ro[constraint=false];
+        // tp2->ro[constraint=false];
+        // tp3->ro[constraint=false];
+        // tp4->ro[constraint=false];
+
+        
+        
+        // influence layout
+        edge[style=invis];
+
+        
+
+        
+}

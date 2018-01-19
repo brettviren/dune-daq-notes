@@ -1,0 +1,1335 @@
+digraph daq {
+	graph[rankdir="LR",style="filled",splines="false",overlap="false",label="DAQ (WIB-FELIX)"];
+	subgraph cluster_cold {
+		graph[label="Cold"];
+		subgraph cluster_femb0 {
+			graph[color="lavenderblush2",part="femb",femb="0",label="FEMB  1"];
+			subgraph cluster_fe0 {
+				graph[color="lavenderblush1",part="fes",femb="0",label=""];
+				"femb01fe1"[part="fe",fe="0",femb="0",label="FE1"];
+				"femb01fe2"[part="fe",fe="1",femb="0",label="FE2"];
+				"femb01fe3"[part="fe",fe="2",femb="0",label="FE3"];
+				"femb01fe4"[part="fe",fe="3",femb="0",label="FE4"];
+				"femb01fe5"[part="fe",fe="4",femb="0",label="FE5"];
+				"femb01fe6"[part="fe",fe="5",femb="0",label="FE6"];
+				"femb01fe7"[part="fe",fe="6",femb="0",label="FE7"];
+				"femb01fe8"[part="fe",fe="7",femb="0",label="FE8"];
+			}
+			subgraph cluster_adc0 {
+				graph[color="lavenderblush1",part="adcs",femb="0",label=""];
+				"femb01adc1"[part="adc",adc="0",femb="0",label="ADC1"];
+				"femb01adc2"[part="adc",adc="1",femb="0",label="ADC2"];
+				"femb01adc3"[part="adc",adc="2",femb="0",label="ADC3"];
+				"femb01adc4"[part="adc",adc="3",femb="0",label="ADC4"];
+				"femb01adc5"[part="adc",adc="4",femb="0",label="ADC5"];
+				"femb01adc6"[part="adc",adc="5",femb="0",label="ADC6"];
+				"femb01adc7"[part="adc",adc="6",femb="0",label="ADC7"];
+				"femb01adc8"[part="adc",adc="7",femb="0",label="ADC8"];
+			}
+			subgraph cluster_tx0 {
+				graph[color="lavenderblush1",part="txs",femb="0",label=""];
+				"femb1tx1"[part="fembtx",tx="0",femb="0",label="tx"];
+				"femb1tx2"[part="fembtx",tx="1",femb="0",label="tx"];
+				"femb1tx3"[part="fembtx",tx="2",femb="0",label="tx"];
+				"femb1tx4"[part="fembtx",tx="3",femb="0",label="tx"];
+			}
+			"femb01fe1" -> "femb01adc1"[];
+			"femb01adc1" -> "femb1tx1"[weight="2.0"];
+			"femb01fe2" -> "femb01adc2"[];
+			"femb01adc2" -> "femb1tx1"[weight="2.0"];
+			"femb01fe3" -> "femb01adc3"[];
+			"femb01adc3" -> "femb1tx2"[weight="2.0"];
+			"femb01fe4" -> "femb01adc4"[];
+			"femb01adc4" -> "femb1tx2"[weight="2.0"];
+			"femb01fe5" -> "femb01adc5"[];
+			"femb01adc5" -> "femb1tx3"[weight="2.0"];
+			"femb01fe6" -> "femb01adc6"[];
+			"femb01adc6" -> "femb1tx3"[weight="2.0"];
+			"femb01fe7" -> "femb01adc7"[];
+			"femb01adc7" -> "femb1tx4"[weight="2.0"];
+			"femb01fe8" -> "femb01adc8"[];
+			"femb01adc8" -> "femb1tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb1 {
+			graph[color="lavenderblush2",part="femb",femb="1",label="FEMB  2"];
+			subgraph cluster_fe1 {
+				graph[color="lavenderblush1",part="fes",femb="1",label=""];
+				"femb02fe1"[part="fe",fe="0",femb="1",label="FE1"];
+				"femb02fe2"[part="fe",fe="1",femb="1",label="FE2"];
+				"femb02fe3"[part="fe",fe="2",femb="1",label="FE3"];
+				"femb02fe4"[part="fe",fe="3",femb="1",label="FE4"];
+				"femb02fe5"[part="fe",fe="4",femb="1",label="FE5"];
+				"femb02fe6"[part="fe",fe="5",femb="1",label="FE6"];
+				"femb02fe7"[part="fe",fe="6",femb="1",label="FE7"];
+				"femb02fe8"[part="fe",fe="7",femb="1",label="FE8"];
+			}
+			subgraph cluster_adc1 {
+				graph[color="lavenderblush1",part="adcs",femb="1",label=""];
+				"femb02adc1"[part="adc",adc="0",femb="1",label="ADC1"];
+				"femb02adc2"[part="adc",adc="1",femb="1",label="ADC2"];
+				"femb02adc3"[part="adc",adc="2",femb="1",label="ADC3"];
+				"femb02adc4"[part="adc",adc="3",femb="1",label="ADC4"];
+				"femb02adc5"[part="adc",adc="4",femb="1",label="ADC5"];
+				"femb02adc6"[part="adc",adc="5",femb="1",label="ADC6"];
+				"femb02adc7"[part="adc",adc="6",femb="1",label="ADC7"];
+				"femb02adc8"[part="adc",adc="7",femb="1",label="ADC8"];
+			}
+			subgraph cluster_tx1 {
+				graph[color="lavenderblush1",part="txs",femb="1",label=""];
+				"femb2tx1"[part="fembtx",tx="0",femb="1",label="tx"];
+				"femb2tx2"[part="fembtx",tx="1",femb="1",label="tx"];
+				"femb2tx3"[part="fembtx",tx="2",femb="1",label="tx"];
+				"femb2tx4"[part="fembtx",tx="3",femb="1",label="tx"];
+			}
+			"femb02fe1" -> "femb02adc1"[];
+			"femb02adc1" -> "femb2tx1"[weight="2.0"];
+			"femb02fe2" -> "femb02adc2"[];
+			"femb02adc2" -> "femb2tx1"[weight="2.0"];
+			"femb02fe3" -> "femb02adc3"[];
+			"femb02adc3" -> "femb2tx2"[weight="2.0"];
+			"femb02fe4" -> "femb02adc4"[];
+			"femb02adc4" -> "femb2tx2"[weight="2.0"];
+			"femb02fe5" -> "femb02adc5"[];
+			"femb02adc5" -> "femb2tx3"[weight="2.0"];
+			"femb02fe6" -> "femb02adc6"[];
+			"femb02adc6" -> "femb2tx3"[weight="2.0"];
+			"femb02fe7" -> "femb02adc7"[];
+			"femb02adc7" -> "femb2tx4"[weight="2.0"];
+			"femb02fe8" -> "femb02adc8"[];
+			"femb02adc8" -> "femb2tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb2 {
+			graph[color="lavenderblush2",part="femb",femb="2",label="FEMB  3"];
+			subgraph cluster_fe2 {
+				graph[color="lavenderblush1",part="fes",femb="2",label=""];
+				"femb03fe1"[part="fe",fe="0",femb="2",label="FE1"];
+				"femb03fe2"[part="fe",fe="1",femb="2",label="FE2"];
+				"femb03fe3"[part="fe",fe="2",femb="2",label="FE3"];
+				"femb03fe4"[part="fe",fe="3",femb="2",label="FE4"];
+				"femb03fe5"[part="fe",fe="4",femb="2",label="FE5"];
+				"femb03fe6"[part="fe",fe="5",femb="2",label="FE6"];
+				"femb03fe7"[part="fe",fe="6",femb="2",label="FE7"];
+				"femb03fe8"[part="fe",fe="7",femb="2",label="FE8"];
+			}
+			subgraph cluster_adc2 {
+				graph[color="lavenderblush1",part="adcs",femb="2",label=""];
+				"femb03adc1"[part="adc",adc="0",femb="2",label="ADC1"];
+				"femb03adc2"[part="adc",adc="1",femb="2",label="ADC2"];
+				"femb03adc3"[part="adc",adc="2",femb="2",label="ADC3"];
+				"femb03adc4"[part="adc",adc="3",femb="2",label="ADC4"];
+				"femb03adc5"[part="adc",adc="4",femb="2",label="ADC5"];
+				"femb03adc6"[part="adc",adc="5",femb="2",label="ADC6"];
+				"femb03adc7"[part="adc",adc="6",femb="2",label="ADC7"];
+				"femb03adc8"[part="adc",adc="7",femb="2",label="ADC8"];
+			}
+			subgraph cluster_tx2 {
+				graph[color="lavenderblush1",part="txs",femb="2",label=""];
+				"femb3tx1"[part="fembtx",tx="0",femb="2",label="tx"];
+				"femb3tx2"[part="fembtx",tx="1",femb="2",label="tx"];
+				"femb3tx3"[part="fembtx",tx="2",femb="2",label="tx"];
+				"femb3tx4"[part="fembtx",tx="3",femb="2",label="tx"];
+			}
+			"femb03fe1" -> "femb03adc1"[];
+			"femb03adc1" -> "femb3tx1"[weight="2.0"];
+			"femb03fe2" -> "femb03adc2"[];
+			"femb03adc2" -> "femb3tx1"[weight="2.0"];
+			"femb03fe3" -> "femb03adc3"[];
+			"femb03adc3" -> "femb3tx2"[weight="2.0"];
+			"femb03fe4" -> "femb03adc4"[];
+			"femb03adc4" -> "femb3tx2"[weight="2.0"];
+			"femb03fe5" -> "femb03adc5"[];
+			"femb03adc5" -> "femb3tx3"[weight="2.0"];
+			"femb03fe6" -> "femb03adc6"[];
+			"femb03adc6" -> "femb3tx3"[weight="2.0"];
+			"femb03fe7" -> "femb03adc7"[];
+			"femb03adc7" -> "femb3tx4"[weight="2.0"];
+			"femb03fe8" -> "femb03adc8"[];
+			"femb03adc8" -> "femb3tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb3 {
+			graph[color="lavenderblush2",part="femb",femb="3",label="FEMB  4"];
+			subgraph cluster_fe3 {
+				graph[color="lavenderblush1",part="fes",femb="3",label=""];
+				"femb04fe1"[part="fe",fe="0",femb="3",label="FE1"];
+				"femb04fe2"[part="fe",fe="1",femb="3",label="FE2"];
+				"femb04fe3"[part="fe",fe="2",femb="3",label="FE3"];
+				"femb04fe4"[part="fe",fe="3",femb="3",label="FE4"];
+				"femb04fe5"[part="fe",fe="4",femb="3",label="FE5"];
+				"femb04fe6"[part="fe",fe="5",femb="3",label="FE6"];
+				"femb04fe7"[part="fe",fe="6",femb="3",label="FE7"];
+				"femb04fe8"[part="fe",fe="7",femb="3",label="FE8"];
+			}
+			subgraph cluster_adc3 {
+				graph[color="lavenderblush1",part="adcs",femb="3",label=""];
+				"femb04adc1"[part="adc",adc="0",femb="3",label="ADC1"];
+				"femb04adc2"[part="adc",adc="1",femb="3",label="ADC2"];
+				"femb04adc3"[part="adc",adc="2",femb="3",label="ADC3"];
+				"femb04adc4"[part="adc",adc="3",femb="3",label="ADC4"];
+				"femb04adc5"[part="adc",adc="4",femb="3",label="ADC5"];
+				"femb04adc6"[part="adc",adc="5",femb="3",label="ADC6"];
+				"femb04adc7"[part="adc",adc="6",femb="3",label="ADC7"];
+				"femb04adc8"[part="adc",adc="7",femb="3",label="ADC8"];
+			}
+			subgraph cluster_tx3 {
+				graph[color="lavenderblush1",part="txs",femb="3",label=""];
+				"femb4tx1"[part="fembtx",tx="0",femb="3",label="tx"];
+				"femb4tx2"[part="fembtx",tx="1",femb="3",label="tx"];
+				"femb4tx3"[part="fembtx",tx="2",femb="3",label="tx"];
+				"femb4tx4"[part="fembtx",tx="3",femb="3",label="tx"];
+			}
+			"femb04fe1" -> "femb04adc1"[];
+			"femb04adc1" -> "femb4tx1"[weight="2.0"];
+			"femb04fe2" -> "femb04adc2"[];
+			"femb04adc2" -> "femb4tx1"[weight="2.0"];
+			"femb04fe3" -> "femb04adc3"[];
+			"femb04adc3" -> "femb4tx2"[weight="2.0"];
+			"femb04fe4" -> "femb04adc4"[];
+			"femb04adc4" -> "femb4tx2"[weight="2.0"];
+			"femb04fe5" -> "femb04adc5"[];
+			"femb04adc5" -> "femb4tx3"[weight="2.0"];
+			"femb04fe6" -> "femb04adc6"[];
+			"femb04adc6" -> "femb4tx3"[weight="2.0"];
+			"femb04fe7" -> "femb04adc7"[];
+			"femb04adc7" -> "femb4tx4"[weight="2.0"];
+			"femb04fe8" -> "femb04adc8"[];
+			"femb04adc8" -> "femb4tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb4 {
+			graph[color="lavenderblush2",part="femb",femb="4",label="FEMB  5"];
+			subgraph cluster_fe4 {
+				graph[color="lavenderblush1",part="fes",femb="4",label=""];
+				"femb05fe1"[part="fe",fe="0",femb="4",label="FE1"];
+				"femb05fe2"[part="fe",fe="1",femb="4",label="FE2"];
+				"femb05fe3"[part="fe",fe="2",femb="4",label="FE3"];
+				"femb05fe4"[part="fe",fe="3",femb="4",label="FE4"];
+				"femb05fe5"[part="fe",fe="4",femb="4",label="FE5"];
+				"femb05fe6"[part="fe",fe="5",femb="4",label="FE6"];
+				"femb05fe7"[part="fe",fe="6",femb="4",label="FE7"];
+				"femb05fe8"[part="fe",fe="7",femb="4",label="FE8"];
+			}
+			subgraph cluster_adc4 {
+				graph[color="lavenderblush1",part="adcs",femb="4",label=""];
+				"femb05adc1"[part="adc",adc="0",femb="4",label="ADC1"];
+				"femb05adc2"[part="adc",adc="1",femb="4",label="ADC2"];
+				"femb05adc3"[part="adc",adc="2",femb="4",label="ADC3"];
+				"femb05adc4"[part="adc",adc="3",femb="4",label="ADC4"];
+				"femb05adc5"[part="adc",adc="4",femb="4",label="ADC5"];
+				"femb05adc6"[part="adc",adc="5",femb="4",label="ADC6"];
+				"femb05adc7"[part="adc",adc="6",femb="4",label="ADC7"];
+				"femb05adc8"[part="adc",adc="7",femb="4",label="ADC8"];
+			}
+			subgraph cluster_tx4 {
+				graph[color="lavenderblush1",part="txs",femb="4",label=""];
+				"femb5tx1"[part="fembtx",tx="0",femb="4",label="tx"];
+				"femb5tx2"[part="fembtx",tx="1",femb="4",label="tx"];
+				"femb5tx3"[part="fembtx",tx="2",femb="4",label="tx"];
+				"femb5tx4"[part="fembtx",tx="3",femb="4",label="tx"];
+			}
+			"femb05fe1" -> "femb05adc1"[];
+			"femb05adc1" -> "femb5tx1"[weight="2.0"];
+			"femb05fe2" -> "femb05adc2"[];
+			"femb05adc2" -> "femb5tx1"[weight="2.0"];
+			"femb05fe3" -> "femb05adc3"[];
+			"femb05adc3" -> "femb5tx2"[weight="2.0"];
+			"femb05fe4" -> "femb05adc4"[];
+			"femb05adc4" -> "femb5tx2"[weight="2.0"];
+			"femb05fe5" -> "femb05adc5"[];
+			"femb05adc5" -> "femb5tx3"[weight="2.0"];
+			"femb05fe6" -> "femb05adc6"[];
+			"femb05adc6" -> "femb5tx3"[weight="2.0"];
+			"femb05fe7" -> "femb05adc7"[];
+			"femb05adc7" -> "femb5tx4"[weight="2.0"];
+			"femb05fe8" -> "femb05adc8"[];
+			"femb05adc8" -> "femb5tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb5 {
+			graph[color="lavenderblush2",part="femb",femb="5",label="FEMB  6"];
+			subgraph cluster_fe5 {
+				graph[color="lavenderblush1",part="fes",femb="5",label=""];
+				"femb06fe1"[part="fe",fe="0",femb="5",label="FE1"];
+				"femb06fe2"[part="fe",fe="1",femb="5",label="FE2"];
+				"femb06fe3"[part="fe",fe="2",femb="5",label="FE3"];
+				"femb06fe4"[part="fe",fe="3",femb="5",label="FE4"];
+				"femb06fe5"[part="fe",fe="4",femb="5",label="FE5"];
+				"femb06fe6"[part="fe",fe="5",femb="5",label="FE6"];
+				"femb06fe7"[part="fe",fe="6",femb="5",label="FE7"];
+				"femb06fe8"[part="fe",fe="7",femb="5",label="FE8"];
+			}
+			subgraph cluster_adc5 {
+				graph[color="lavenderblush1",part="adcs",femb="5",label=""];
+				"femb06adc1"[part="adc",adc="0",femb="5",label="ADC1"];
+				"femb06adc2"[part="adc",adc="1",femb="5",label="ADC2"];
+				"femb06adc3"[part="adc",adc="2",femb="5",label="ADC3"];
+				"femb06adc4"[part="adc",adc="3",femb="5",label="ADC4"];
+				"femb06adc5"[part="adc",adc="4",femb="5",label="ADC5"];
+				"femb06adc6"[part="adc",adc="5",femb="5",label="ADC6"];
+				"femb06adc7"[part="adc",adc="6",femb="5",label="ADC7"];
+				"femb06adc8"[part="adc",adc="7",femb="5",label="ADC8"];
+			}
+			subgraph cluster_tx5 {
+				graph[color="lavenderblush1",part="txs",femb="5",label=""];
+				"femb6tx1"[part="fembtx",tx="0",femb="5",label="tx"];
+				"femb6tx2"[part="fembtx",tx="1",femb="5",label="tx"];
+				"femb6tx3"[part="fembtx",tx="2",femb="5",label="tx"];
+				"femb6tx4"[part="fembtx",tx="3",femb="5",label="tx"];
+			}
+			"femb06fe1" -> "femb06adc1"[];
+			"femb06adc1" -> "femb6tx1"[weight="2.0"];
+			"femb06fe2" -> "femb06adc2"[];
+			"femb06adc2" -> "femb6tx1"[weight="2.0"];
+			"femb06fe3" -> "femb06adc3"[];
+			"femb06adc3" -> "femb6tx2"[weight="2.0"];
+			"femb06fe4" -> "femb06adc4"[];
+			"femb06adc4" -> "femb6tx2"[weight="2.0"];
+			"femb06fe5" -> "femb06adc5"[];
+			"femb06adc5" -> "femb6tx3"[weight="2.0"];
+			"femb06fe6" -> "femb06adc6"[];
+			"femb06adc6" -> "femb6tx3"[weight="2.0"];
+			"femb06fe7" -> "femb06adc7"[];
+			"femb06adc7" -> "femb6tx4"[weight="2.0"];
+			"femb06fe8" -> "femb06adc8"[];
+			"femb06adc8" -> "femb6tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb6 {
+			graph[color="lavenderblush2",part="femb",femb="6",label="FEMB  7"];
+			subgraph cluster_fe6 {
+				graph[color="lavenderblush1",part="fes",femb="6",label=""];
+				"femb07fe1"[part="fe",fe="0",femb="6",label="FE1"];
+				"femb07fe2"[part="fe",fe="1",femb="6",label="FE2"];
+				"femb07fe3"[part="fe",fe="2",femb="6",label="FE3"];
+				"femb07fe4"[part="fe",fe="3",femb="6",label="FE4"];
+				"femb07fe5"[part="fe",fe="4",femb="6",label="FE5"];
+				"femb07fe6"[part="fe",fe="5",femb="6",label="FE6"];
+				"femb07fe7"[part="fe",fe="6",femb="6",label="FE7"];
+				"femb07fe8"[part="fe",fe="7",femb="6",label="FE8"];
+			}
+			subgraph cluster_adc6 {
+				graph[color="lavenderblush1",part="adcs",femb="6",label=""];
+				"femb07adc1"[part="adc",adc="0",femb="6",label="ADC1"];
+				"femb07adc2"[part="adc",adc="1",femb="6",label="ADC2"];
+				"femb07adc3"[part="adc",adc="2",femb="6",label="ADC3"];
+				"femb07adc4"[part="adc",adc="3",femb="6",label="ADC4"];
+				"femb07adc5"[part="adc",adc="4",femb="6",label="ADC5"];
+				"femb07adc6"[part="adc",adc="5",femb="6",label="ADC6"];
+				"femb07adc7"[part="adc",adc="6",femb="6",label="ADC7"];
+				"femb07adc8"[part="adc",adc="7",femb="6",label="ADC8"];
+			}
+			subgraph cluster_tx6 {
+				graph[color="lavenderblush1",part="txs",femb="6",label=""];
+				"femb7tx1"[part="fembtx",tx="0",femb="6",label="tx"];
+				"femb7tx2"[part="fembtx",tx="1",femb="6",label="tx"];
+				"femb7tx3"[part="fembtx",tx="2",femb="6",label="tx"];
+				"femb7tx4"[part="fembtx",tx="3",femb="6",label="tx"];
+			}
+			"femb07fe1" -> "femb07adc1"[];
+			"femb07adc1" -> "femb7tx1"[weight="2.0"];
+			"femb07fe2" -> "femb07adc2"[];
+			"femb07adc2" -> "femb7tx1"[weight="2.0"];
+			"femb07fe3" -> "femb07adc3"[];
+			"femb07adc3" -> "femb7tx2"[weight="2.0"];
+			"femb07fe4" -> "femb07adc4"[];
+			"femb07adc4" -> "femb7tx2"[weight="2.0"];
+			"femb07fe5" -> "femb07adc5"[];
+			"femb07adc5" -> "femb7tx3"[weight="2.0"];
+			"femb07fe6" -> "femb07adc6"[];
+			"femb07adc6" -> "femb7tx3"[weight="2.0"];
+			"femb07fe7" -> "femb07adc7"[];
+			"femb07adc7" -> "femb7tx4"[weight="2.0"];
+			"femb07fe8" -> "femb07adc8"[];
+			"femb07adc8" -> "femb7tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb7 {
+			graph[color="lavenderblush2",part="femb",femb="7",label="FEMB  8"];
+			subgraph cluster_fe7 {
+				graph[color="lavenderblush1",part="fes",femb="7",label=""];
+				"femb08fe1"[part="fe",fe="0",femb="7",label="FE1"];
+				"femb08fe2"[part="fe",fe="1",femb="7",label="FE2"];
+				"femb08fe3"[part="fe",fe="2",femb="7",label="FE3"];
+				"femb08fe4"[part="fe",fe="3",femb="7",label="FE4"];
+				"femb08fe5"[part="fe",fe="4",femb="7",label="FE5"];
+				"femb08fe6"[part="fe",fe="5",femb="7",label="FE6"];
+				"femb08fe7"[part="fe",fe="6",femb="7",label="FE7"];
+				"femb08fe8"[part="fe",fe="7",femb="7",label="FE8"];
+			}
+			subgraph cluster_adc7 {
+				graph[color="lavenderblush1",part="adcs",femb="7",label=""];
+				"femb08adc1"[part="adc",adc="0",femb="7",label="ADC1"];
+				"femb08adc2"[part="adc",adc="1",femb="7",label="ADC2"];
+				"femb08adc3"[part="adc",adc="2",femb="7",label="ADC3"];
+				"femb08adc4"[part="adc",adc="3",femb="7",label="ADC4"];
+				"femb08adc5"[part="adc",adc="4",femb="7",label="ADC5"];
+				"femb08adc6"[part="adc",adc="5",femb="7",label="ADC6"];
+				"femb08adc7"[part="adc",adc="6",femb="7",label="ADC7"];
+				"femb08adc8"[part="adc",adc="7",femb="7",label="ADC8"];
+			}
+			subgraph cluster_tx7 {
+				graph[color="lavenderblush1",part="txs",femb="7",label=""];
+				"femb8tx1"[part="fembtx",tx="0",femb="7",label="tx"];
+				"femb8tx2"[part="fembtx",tx="1",femb="7",label="tx"];
+				"femb8tx3"[part="fembtx",tx="2",femb="7",label="tx"];
+				"femb8tx4"[part="fembtx",tx="3",femb="7",label="tx"];
+			}
+			"femb08fe1" -> "femb08adc1"[];
+			"femb08adc1" -> "femb8tx1"[weight="2.0"];
+			"femb08fe2" -> "femb08adc2"[];
+			"femb08adc2" -> "femb8tx1"[weight="2.0"];
+			"femb08fe3" -> "femb08adc3"[];
+			"femb08adc3" -> "femb8tx2"[weight="2.0"];
+			"femb08fe4" -> "femb08adc4"[];
+			"femb08adc4" -> "femb8tx2"[weight="2.0"];
+			"femb08fe5" -> "femb08adc5"[];
+			"femb08adc5" -> "femb8tx3"[weight="2.0"];
+			"femb08fe6" -> "femb08adc6"[];
+			"femb08adc6" -> "femb8tx3"[weight="2.0"];
+			"femb08fe7" -> "femb08adc7"[];
+			"femb08adc7" -> "femb8tx4"[weight="2.0"];
+			"femb08fe8" -> "femb08adc8"[];
+			"femb08adc8" -> "femb8tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb8 {
+			graph[color="lavenderblush2",part="femb",femb="8",label="FEMB  9"];
+			subgraph cluster_fe8 {
+				graph[color="lavenderblush1",part="fes",femb="8",label=""];
+				"femb09fe1"[part="fe",fe="0",femb="8",label="FE1"];
+				"femb09fe2"[part="fe",fe="1",femb="8",label="FE2"];
+				"femb09fe3"[part="fe",fe="2",femb="8",label="FE3"];
+				"femb09fe4"[part="fe",fe="3",femb="8",label="FE4"];
+				"femb09fe5"[part="fe",fe="4",femb="8",label="FE5"];
+				"femb09fe6"[part="fe",fe="5",femb="8",label="FE6"];
+				"femb09fe7"[part="fe",fe="6",femb="8",label="FE7"];
+				"femb09fe8"[part="fe",fe="7",femb="8",label="FE8"];
+			}
+			subgraph cluster_adc8 {
+				graph[color="lavenderblush1",part="adcs",femb="8",label=""];
+				"femb09adc1"[part="adc",adc="0",femb="8",label="ADC1"];
+				"femb09adc2"[part="adc",adc="1",femb="8",label="ADC2"];
+				"femb09adc3"[part="adc",adc="2",femb="8",label="ADC3"];
+				"femb09adc4"[part="adc",adc="3",femb="8",label="ADC4"];
+				"femb09adc5"[part="adc",adc="4",femb="8",label="ADC5"];
+				"femb09adc6"[part="adc",adc="5",femb="8",label="ADC6"];
+				"femb09adc7"[part="adc",adc="6",femb="8",label="ADC7"];
+				"femb09adc8"[part="adc",adc="7",femb="8",label="ADC8"];
+			}
+			subgraph cluster_tx8 {
+				graph[color="lavenderblush1",part="txs",femb="8",label=""];
+				"femb9tx1"[part="fembtx",tx="0",femb="8",label="tx"];
+				"femb9tx2"[part="fembtx",tx="1",femb="8",label="tx"];
+				"femb9tx3"[part="fembtx",tx="2",femb="8",label="tx"];
+				"femb9tx4"[part="fembtx",tx="3",femb="8",label="tx"];
+			}
+			"femb09fe1" -> "femb09adc1"[];
+			"femb09adc1" -> "femb9tx1"[weight="2.0"];
+			"femb09fe2" -> "femb09adc2"[];
+			"femb09adc2" -> "femb9tx1"[weight="2.0"];
+			"femb09fe3" -> "femb09adc3"[];
+			"femb09adc3" -> "femb9tx2"[weight="2.0"];
+			"femb09fe4" -> "femb09adc4"[];
+			"femb09adc4" -> "femb9tx2"[weight="2.0"];
+			"femb09fe5" -> "femb09adc5"[];
+			"femb09adc5" -> "femb9tx3"[weight="2.0"];
+			"femb09fe6" -> "femb09adc6"[];
+			"femb09adc6" -> "femb9tx3"[weight="2.0"];
+			"femb09fe7" -> "femb09adc7"[];
+			"femb09adc7" -> "femb9tx4"[weight="2.0"];
+			"femb09fe8" -> "femb09adc8"[];
+			"femb09adc8" -> "femb9tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb9 {
+			graph[color="lavenderblush2",part="femb",femb="9",label="FEMB 10"];
+			subgraph cluster_fe9 {
+				graph[color="lavenderblush1",part="fes",femb="9",label=""];
+				"femb10fe1"[part="fe",fe="0",femb="9",label="FE1"];
+				"femb10fe2"[part="fe",fe="1",femb="9",label="FE2"];
+				"femb10fe3"[part="fe",fe="2",femb="9",label="FE3"];
+				"femb10fe4"[part="fe",fe="3",femb="9",label="FE4"];
+				"femb10fe5"[part="fe",fe="4",femb="9",label="FE5"];
+				"femb10fe6"[part="fe",fe="5",femb="9",label="FE6"];
+				"femb10fe7"[part="fe",fe="6",femb="9",label="FE7"];
+				"femb10fe8"[part="fe",fe="7",femb="9",label="FE8"];
+			}
+			subgraph cluster_adc9 {
+				graph[color="lavenderblush1",part="adcs",femb="9",label=""];
+				"femb10adc1"[part="adc",adc="0",femb="9",label="ADC1"];
+				"femb10adc2"[part="adc",adc="1",femb="9",label="ADC2"];
+				"femb10adc3"[part="adc",adc="2",femb="9",label="ADC3"];
+				"femb10adc4"[part="adc",adc="3",femb="9",label="ADC4"];
+				"femb10adc5"[part="adc",adc="4",femb="9",label="ADC5"];
+				"femb10adc6"[part="adc",adc="5",femb="9",label="ADC6"];
+				"femb10adc7"[part="adc",adc="6",femb="9",label="ADC7"];
+				"femb10adc8"[part="adc",adc="7",femb="9",label="ADC8"];
+			}
+			subgraph cluster_tx9 {
+				graph[color="lavenderblush1",part="txs",femb="9",label=""];
+				"femb10tx1"[part="fembtx",tx="0",femb="9",label="tx"];
+				"femb10tx2"[part="fembtx",tx="1",femb="9",label="tx"];
+				"femb10tx3"[part="fembtx",tx="2",femb="9",label="tx"];
+				"femb10tx4"[part="fembtx",tx="3",femb="9",label="tx"];
+			}
+			"femb10fe1" -> "femb10adc1"[];
+			"femb10adc1" -> "femb10tx1"[weight="2.0"];
+			"femb10fe2" -> "femb10adc2"[];
+			"femb10adc2" -> "femb10tx1"[weight="2.0"];
+			"femb10fe3" -> "femb10adc3"[];
+			"femb10adc3" -> "femb10tx2"[weight="2.0"];
+			"femb10fe4" -> "femb10adc4"[];
+			"femb10adc4" -> "femb10tx2"[weight="2.0"];
+			"femb10fe5" -> "femb10adc5"[];
+			"femb10adc5" -> "femb10tx3"[weight="2.0"];
+			"femb10fe6" -> "femb10adc6"[];
+			"femb10adc6" -> "femb10tx3"[weight="2.0"];
+			"femb10fe7" -> "femb10adc7"[];
+			"femb10adc7" -> "femb10tx4"[weight="2.0"];
+			"femb10fe8" -> "femb10adc8"[];
+			"femb10adc8" -> "femb10tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb10 {
+			graph[color="lavenderblush2",part="femb",femb="10",label="FEMB 11"];
+			subgraph cluster_fe10 {
+				graph[color="lavenderblush1",part="fes",femb="10",label=""];
+				"femb11fe1"[part="fe",fe="0",femb="10",label="FE1"];
+				"femb11fe2"[part="fe",fe="1",femb="10",label="FE2"];
+				"femb11fe3"[part="fe",fe="2",femb="10",label="FE3"];
+				"femb11fe4"[part="fe",fe="3",femb="10",label="FE4"];
+				"femb11fe5"[part="fe",fe="4",femb="10",label="FE5"];
+				"femb11fe6"[part="fe",fe="5",femb="10",label="FE6"];
+				"femb11fe7"[part="fe",fe="6",femb="10",label="FE7"];
+				"femb11fe8"[part="fe",fe="7",femb="10",label="FE8"];
+			}
+			subgraph cluster_adc10 {
+				graph[color="lavenderblush1",part="adcs",femb="10",label=""];
+				"femb11adc1"[part="adc",adc="0",femb="10",label="ADC1"];
+				"femb11adc2"[part="adc",adc="1",femb="10",label="ADC2"];
+				"femb11adc3"[part="adc",adc="2",femb="10",label="ADC3"];
+				"femb11adc4"[part="adc",adc="3",femb="10",label="ADC4"];
+				"femb11adc5"[part="adc",adc="4",femb="10",label="ADC5"];
+				"femb11adc6"[part="adc",adc="5",femb="10",label="ADC6"];
+				"femb11adc7"[part="adc",adc="6",femb="10",label="ADC7"];
+				"femb11adc8"[part="adc",adc="7",femb="10",label="ADC8"];
+			}
+			subgraph cluster_tx10 {
+				graph[color="lavenderblush1",part="txs",femb="10",label=""];
+				"femb11tx1"[part="fembtx",tx="0",femb="10",label="tx"];
+				"femb11tx2"[part="fembtx",tx="1",femb="10",label="tx"];
+				"femb11tx3"[part="fembtx",tx="2",femb="10",label="tx"];
+				"femb11tx4"[part="fembtx",tx="3",femb="10",label="tx"];
+			}
+			"femb11fe1" -> "femb11adc1"[];
+			"femb11adc1" -> "femb11tx1"[weight="2.0"];
+			"femb11fe2" -> "femb11adc2"[];
+			"femb11adc2" -> "femb11tx1"[weight="2.0"];
+			"femb11fe3" -> "femb11adc3"[];
+			"femb11adc3" -> "femb11tx2"[weight="2.0"];
+			"femb11fe4" -> "femb11adc4"[];
+			"femb11adc4" -> "femb11tx2"[weight="2.0"];
+			"femb11fe5" -> "femb11adc5"[];
+			"femb11adc5" -> "femb11tx3"[weight="2.0"];
+			"femb11fe6" -> "femb11adc6"[];
+			"femb11adc6" -> "femb11tx3"[weight="2.0"];
+			"femb11fe7" -> "femb11adc7"[];
+			"femb11adc7" -> "femb11tx4"[weight="2.0"];
+			"femb11fe8" -> "femb11adc8"[];
+			"femb11adc8" -> "femb11tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb11 {
+			graph[color="lavenderblush2",part="femb",femb="11",label="FEMB 12"];
+			subgraph cluster_fe11 {
+				graph[color="lavenderblush1",part="fes",femb="11",label=""];
+				"femb12fe1"[part="fe",fe="0",femb="11",label="FE1"];
+				"femb12fe2"[part="fe",fe="1",femb="11",label="FE2"];
+				"femb12fe3"[part="fe",fe="2",femb="11",label="FE3"];
+				"femb12fe4"[part="fe",fe="3",femb="11",label="FE4"];
+				"femb12fe5"[part="fe",fe="4",femb="11",label="FE5"];
+				"femb12fe6"[part="fe",fe="5",femb="11",label="FE6"];
+				"femb12fe7"[part="fe",fe="6",femb="11",label="FE7"];
+				"femb12fe8"[part="fe",fe="7",femb="11",label="FE8"];
+			}
+			subgraph cluster_adc11 {
+				graph[color="lavenderblush1",part="adcs",femb="11",label=""];
+				"femb12adc1"[part="adc",adc="0",femb="11",label="ADC1"];
+				"femb12adc2"[part="adc",adc="1",femb="11",label="ADC2"];
+				"femb12adc3"[part="adc",adc="2",femb="11",label="ADC3"];
+				"femb12adc4"[part="adc",adc="3",femb="11",label="ADC4"];
+				"femb12adc5"[part="adc",adc="4",femb="11",label="ADC5"];
+				"femb12adc6"[part="adc",adc="5",femb="11",label="ADC6"];
+				"femb12adc7"[part="adc",adc="6",femb="11",label="ADC7"];
+				"femb12adc8"[part="adc",adc="7",femb="11",label="ADC8"];
+			}
+			subgraph cluster_tx11 {
+				graph[color="lavenderblush1",part="txs",femb="11",label=""];
+				"femb12tx1"[part="fembtx",tx="0",femb="11",label="tx"];
+				"femb12tx2"[part="fembtx",tx="1",femb="11",label="tx"];
+				"femb12tx3"[part="fembtx",tx="2",femb="11",label="tx"];
+				"femb12tx4"[part="fembtx",tx="3",femb="11",label="tx"];
+			}
+			"femb12fe1" -> "femb12adc1"[];
+			"femb12adc1" -> "femb12tx1"[weight="2.0"];
+			"femb12fe2" -> "femb12adc2"[];
+			"femb12adc2" -> "femb12tx1"[weight="2.0"];
+			"femb12fe3" -> "femb12adc3"[];
+			"femb12adc3" -> "femb12tx2"[weight="2.0"];
+			"femb12fe4" -> "femb12adc4"[];
+			"femb12adc4" -> "femb12tx2"[weight="2.0"];
+			"femb12fe5" -> "femb12adc5"[];
+			"femb12adc5" -> "femb12tx3"[weight="2.0"];
+			"femb12fe6" -> "femb12adc6"[];
+			"femb12adc6" -> "femb12tx3"[weight="2.0"];
+			"femb12fe7" -> "femb12adc7"[];
+			"femb12adc7" -> "femb12tx4"[weight="2.0"];
+			"femb12fe8" -> "femb12adc8"[];
+			"femb12adc8" -> "femb12tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb12 {
+			graph[color="lavenderblush2",part="femb",femb="12",label="FEMB 13"];
+			subgraph cluster_fe12 {
+				graph[color="lavenderblush1",part="fes",femb="12",label=""];
+				"femb13fe1"[part="fe",fe="0",femb="12",label="FE1"];
+				"femb13fe2"[part="fe",fe="1",femb="12",label="FE2"];
+				"femb13fe3"[part="fe",fe="2",femb="12",label="FE3"];
+				"femb13fe4"[part="fe",fe="3",femb="12",label="FE4"];
+				"femb13fe5"[part="fe",fe="4",femb="12",label="FE5"];
+				"femb13fe6"[part="fe",fe="5",femb="12",label="FE6"];
+				"femb13fe7"[part="fe",fe="6",femb="12",label="FE7"];
+				"femb13fe8"[part="fe",fe="7",femb="12",label="FE8"];
+			}
+			subgraph cluster_adc12 {
+				graph[color="lavenderblush1",part="adcs",femb="12",label=""];
+				"femb13adc1"[part="adc",adc="0",femb="12",label="ADC1"];
+				"femb13adc2"[part="adc",adc="1",femb="12",label="ADC2"];
+				"femb13adc3"[part="adc",adc="2",femb="12",label="ADC3"];
+				"femb13adc4"[part="adc",adc="3",femb="12",label="ADC4"];
+				"femb13adc5"[part="adc",adc="4",femb="12",label="ADC5"];
+				"femb13adc6"[part="adc",adc="5",femb="12",label="ADC6"];
+				"femb13adc7"[part="adc",adc="6",femb="12",label="ADC7"];
+				"femb13adc8"[part="adc",adc="7",femb="12",label="ADC8"];
+			}
+			subgraph cluster_tx12 {
+				graph[color="lavenderblush1",part="txs",femb="12",label=""];
+				"femb13tx1"[part="fembtx",tx="0",femb="12",label="tx"];
+				"femb13tx2"[part="fembtx",tx="1",femb="12",label="tx"];
+				"femb13tx3"[part="fembtx",tx="2",femb="12",label="tx"];
+				"femb13tx4"[part="fembtx",tx="3",femb="12",label="tx"];
+			}
+			"femb13fe1" -> "femb13adc1"[];
+			"femb13adc1" -> "femb13tx1"[weight="2.0"];
+			"femb13fe2" -> "femb13adc2"[];
+			"femb13adc2" -> "femb13tx1"[weight="2.0"];
+			"femb13fe3" -> "femb13adc3"[];
+			"femb13adc3" -> "femb13tx2"[weight="2.0"];
+			"femb13fe4" -> "femb13adc4"[];
+			"femb13adc4" -> "femb13tx2"[weight="2.0"];
+			"femb13fe5" -> "femb13adc5"[];
+			"femb13adc5" -> "femb13tx3"[weight="2.0"];
+			"femb13fe6" -> "femb13adc6"[];
+			"femb13adc6" -> "femb13tx3"[weight="2.0"];
+			"femb13fe7" -> "femb13adc7"[];
+			"femb13adc7" -> "femb13tx4"[weight="2.0"];
+			"femb13fe8" -> "femb13adc8"[];
+			"femb13adc8" -> "femb13tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb13 {
+			graph[color="lavenderblush2",part="femb",femb="13",label="FEMB 14"];
+			subgraph cluster_fe13 {
+				graph[color="lavenderblush1",part="fes",femb="13",label=""];
+				"femb14fe1"[part="fe",fe="0",femb="13",label="FE1"];
+				"femb14fe2"[part="fe",fe="1",femb="13",label="FE2"];
+				"femb14fe3"[part="fe",fe="2",femb="13",label="FE3"];
+				"femb14fe4"[part="fe",fe="3",femb="13",label="FE4"];
+				"femb14fe5"[part="fe",fe="4",femb="13",label="FE5"];
+				"femb14fe6"[part="fe",fe="5",femb="13",label="FE6"];
+				"femb14fe7"[part="fe",fe="6",femb="13",label="FE7"];
+				"femb14fe8"[part="fe",fe="7",femb="13",label="FE8"];
+			}
+			subgraph cluster_adc13 {
+				graph[color="lavenderblush1",part="adcs",femb="13",label=""];
+				"femb14adc1"[part="adc",adc="0",femb="13",label="ADC1"];
+				"femb14adc2"[part="adc",adc="1",femb="13",label="ADC2"];
+				"femb14adc3"[part="adc",adc="2",femb="13",label="ADC3"];
+				"femb14adc4"[part="adc",adc="3",femb="13",label="ADC4"];
+				"femb14adc5"[part="adc",adc="4",femb="13",label="ADC5"];
+				"femb14adc6"[part="adc",adc="5",femb="13",label="ADC6"];
+				"femb14adc7"[part="adc",adc="6",femb="13",label="ADC7"];
+				"femb14adc8"[part="adc",adc="7",femb="13",label="ADC8"];
+			}
+			subgraph cluster_tx13 {
+				graph[color="lavenderblush1",part="txs",femb="13",label=""];
+				"femb14tx1"[part="fembtx",tx="0",femb="13",label="tx"];
+				"femb14tx2"[part="fembtx",tx="1",femb="13",label="tx"];
+				"femb14tx3"[part="fembtx",tx="2",femb="13",label="tx"];
+				"femb14tx4"[part="fembtx",tx="3",femb="13",label="tx"];
+			}
+			"femb14fe1" -> "femb14adc1"[];
+			"femb14adc1" -> "femb14tx1"[weight="2.0"];
+			"femb14fe2" -> "femb14adc2"[];
+			"femb14adc2" -> "femb14tx1"[weight="2.0"];
+			"femb14fe3" -> "femb14adc3"[];
+			"femb14adc3" -> "femb14tx2"[weight="2.0"];
+			"femb14fe4" -> "femb14adc4"[];
+			"femb14adc4" -> "femb14tx2"[weight="2.0"];
+			"femb14fe5" -> "femb14adc5"[];
+			"femb14adc5" -> "femb14tx3"[weight="2.0"];
+			"femb14fe6" -> "femb14adc6"[];
+			"femb14adc6" -> "femb14tx3"[weight="2.0"];
+			"femb14fe7" -> "femb14adc7"[];
+			"femb14adc7" -> "femb14tx4"[weight="2.0"];
+			"femb14fe8" -> "femb14adc8"[];
+			"femb14adc8" -> "femb14tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb14 {
+			graph[color="lavenderblush2",part="femb",femb="14",label="FEMB 15"];
+			subgraph cluster_fe14 {
+				graph[color="lavenderblush1",part="fes",femb="14",label=""];
+				"femb15fe1"[part="fe",fe="0",femb="14",label="FE1"];
+				"femb15fe2"[part="fe",fe="1",femb="14",label="FE2"];
+				"femb15fe3"[part="fe",fe="2",femb="14",label="FE3"];
+				"femb15fe4"[part="fe",fe="3",femb="14",label="FE4"];
+				"femb15fe5"[part="fe",fe="4",femb="14",label="FE5"];
+				"femb15fe6"[part="fe",fe="5",femb="14",label="FE6"];
+				"femb15fe7"[part="fe",fe="6",femb="14",label="FE7"];
+				"femb15fe8"[part="fe",fe="7",femb="14",label="FE8"];
+			}
+			subgraph cluster_adc14 {
+				graph[color="lavenderblush1",part="adcs",femb="14",label=""];
+				"femb15adc1"[part="adc",adc="0",femb="14",label="ADC1"];
+				"femb15adc2"[part="adc",adc="1",femb="14",label="ADC2"];
+				"femb15adc3"[part="adc",adc="2",femb="14",label="ADC3"];
+				"femb15adc4"[part="adc",adc="3",femb="14",label="ADC4"];
+				"femb15adc5"[part="adc",adc="4",femb="14",label="ADC5"];
+				"femb15adc6"[part="adc",adc="5",femb="14",label="ADC6"];
+				"femb15adc7"[part="adc",adc="6",femb="14",label="ADC7"];
+				"femb15adc8"[part="adc",adc="7",femb="14",label="ADC8"];
+			}
+			subgraph cluster_tx14 {
+				graph[color="lavenderblush1",part="txs",femb="14",label=""];
+				"femb15tx1"[part="fembtx",tx="0",femb="14",label="tx"];
+				"femb15tx2"[part="fembtx",tx="1",femb="14",label="tx"];
+				"femb15tx3"[part="fembtx",tx="2",femb="14",label="tx"];
+				"femb15tx4"[part="fembtx",tx="3",femb="14",label="tx"];
+			}
+			"femb15fe1" -> "femb15adc1"[];
+			"femb15adc1" -> "femb15tx1"[weight="2.0"];
+			"femb15fe2" -> "femb15adc2"[];
+			"femb15adc2" -> "femb15tx1"[weight="2.0"];
+			"femb15fe3" -> "femb15adc3"[];
+			"femb15adc3" -> "femb15tx2"[weight="2.0"];
+			"femb15fe4" -> "femb15adc4"[];
+			"femb15adc4" -> "femb15tx2"[weight="2.0"];
+			"femb15fe5" -> "femb15adc5"[];
+			"femb15adc5" -> "femb15tx3"[weight="2.0"];
+			"femb15fe6" -> "femb15adc6"[];
+			"femb15adc6" -> "femb15tx3"[weight="2.0"];
+			"femb15fe7" -> "femb15adc7"[];
+			"femb15adc7" -> "femb15tx4"[weight="2.0"];
+			"femb15fe8" -> "femb15adc8"[];
+			"femb15adc8" -> "femb15tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb15 {
+			graph[color="lavenderblush2",part="femb",femb="15",label="FEMB 16"];
+			subgraph cluster_fe15 {
+				graph[color="lavenderblush1",part="fes",femb="15",label=""];
+				"femb16fe1"[part="fe",fe="0",femb="15",label="FE1"];
+				"femb16fe2"[part="fe",fe="1",femb="15",label="FE2"];
+				"femb16fe3"[part="fe",fe="2",femb="15",label="FE3"];
+				"femb16fe4"[part="fe",fe="3",femb="15",label="FE4"];
+				"femb16fe5"[part="fe",fe="4",femb="15",label="FE5"];
+				"femb16fe6"[part="fe",fe="5",femb="15",label="FE6"];
+				"femb16fe7"[part="fe",fe="6",femb="15",label="FE7"];
+				"femb16fe8"[part="fe",fe="7",femb="15",label="FE8"];
+			}
+			subgraph cluster_adc15 {
+				graph[color="lavenderblush1",part="adcs",femb="15",label=""];
+				"femb16adc1"[part="adc",adc="0",femb="15",label="ADC1"];
+				"femb16adc2"[part="adc",adc="1",femb="15",label="ADC2"];
+				"femb16adc3"[part="adc",adc="2",femb="15",label="ADC3"];
+				"femb16adc4"[part="adc",adc="3",femb="15",label="ADC4"];
+				"femb16adc5"[part="adc",adc="4",femb="15",label="ADC5"];
+				"femb16adc6"[part="adc",adc="5",femb="15",label="ADC6"];
+				"femb16adc7"[part="adc",adc="6",femb="15",label="ADC7"];
+				"femb16adc8"[part="adc",adc="7",femb="15",label="ADC8"];
+			}
+			subgraph cluster_tx15 {
+				graph[color="lavenderblush1",part="txs",femb="15",label=""];
+				"femb16tx1"[part="fembtx",tx="0",femb="15",label="tx"];
+				"femb16tx2"[part="fembtx",tx="1",femb="15",label="tx"];
+				"femb16tx3"[part="fembtx",tx="2",femb="15",label="tx"];
+				"femb16tx4"[part="fembtx",tx="3",femb="15",label="tx"];
+			}
+			"femb16fe1" -> "femb16adc1"[];
+			"femb16adc1" -> "femb16tx1"[weight="2.0"];
+			"femb16fe2" -> "femb16adc2"[];
+			"femb16adc2" -> "femb16tx1"[weight="2.0"];
+			"femb16fe3" -> "femb16adc3"[];
+			"femb16adc3" -> "femb16tx2"[weight="2.0"];
+			"femb16fe4" -> "femb16adc4"[];
+			"femb16adc4" -> "femb16tx2"[weight="2.0"];
+			"femb16fe5" -> "femb16adc5"[];
+			"femb16adc5" -> "femb16tx3"[weight="2.0"];
+			"femb16fe6" -> "femb16adc6"[];
+			"femb16adc6" -> "femb16tx3"[weight="2.0"];
+			"femb16fe7" -> "femb16adc7"[];
+			"femb16adc7" -> "femb16tx4"[weight="2.0"];
+			"femb16fe8" -> "femb16adc8"[];
+			"femb16adc8" -> "femb16tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb16 {
+			graph[color="lavenderblush2",part="femb",femb="16",label="FEMB 17"];
+			subgraph cluster_fe16 {
+				graph[color="lavenderblush1",part="fes",femb="16",label=""];
+				"femb17fe1"[part="fe",fe="0",femb="16",label="FE1"];
+				"femb17fe2"[part="fe",fe="1",femb="16",label="FE2"];
+				"femb17fe3"[part="fe",fe="2",femb="16",label="FE3"];
+				"femb17fe4"[part="fe",fe="3",femb="16",label="FE4"];
+				"femb17fe5"[part="fe",fe="4",femb="16",label="FE5"];
+				"femb17fe6"[part="fe",fe="5",femb="16",label="FE6"];
+				"femb17fe7"[part="fe",fe="6",femb="16",label="FE7"];
+				"femb17fe8"[part="fe",fe="7",femb="16",label="FE8"];
+			}
+			subgraph cluster_adc16 {
+				graph[color="lavenderblush1",part="adcs",femb="16",label=""];
+				"femb17adc1"[part="adc",adc="0",femb="16",label="ADC1"];
+				"femb17adc2"[part="adc",adc="1",femb="16",label="ADC2"];
+				"femb17adc3"[part="adc",adc="2",femb="16",label="ADC3"];
+				"femb17adc4"[part="adc",adc="3",femb="16",label="ADC4"];
+				"femb17adc5"[part="adc",adc="4",femb="16",label="ADC5"];
+				"femb17adc6"[part="adc",adc="5",femb="16",label="ADC6"];
+				"femb17adc7"[part="adc",adc="6",femb="16",label="ADC7"];
+				"femb17adc8"[part="adc",adc="7",femb="16",label="ADC8"];
+			}
+			subgraph cluster_tx16 {
+				graph[color="lavenderblush1",part="txs",femb="16",label=""];
+				"femb17tx1"[part="fembtx",tx="0",femb="16",label="tx"];
+				"femb17tx2"[part="fembtx",tx="1",femb="16",label="tx"];
+				"femb17tx3"[part="fembtx",tx="2",femb="16",label="tx"];
+				"femb17tx4"[part="fembtx",tx="3",femb="16",label="tx"];
+			}
+			"femb17fe1" -> "femb17adc1"[];
+			"femb17adc1" -> "femb17tx1"[weight="2.0"];
+			"femb17fe2" -> "femb17adc2"[];
+			"femb17adc2" -> "femb17tx1"[weight="2.0"];
+			"femb17fe3" -> "femb17adc3"[];
+			"femb17adc3" -> "femb17tx2"[weight="2.0"];
+			"femb17fe4" -> "femb17adc4"[];
+			"femb17adc4" -> "femb17tx2"[weight="2.0"];
+			"femb17fe5" -> "femb17adc5"[];
+			"femb17adc5" -> "femb17tx3"[weight="2.0"];
+			"femb17fe6" -> "femb17adc6"[];
+			"femb17adc6" -> "femb17tx3"[weight="2.0"];
+			"femb17fe7" -> "femb17adc7"[];
+			"femb17adc7" -> "femb17tx4"[weight="2.0"];
+			"femb17fe8" -> "femb17adc8"[];
+			"femb17adc8" -> "femb17tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb17 {
+			graph[color="lavenderblush2",part="femb",femb="17",label="FEMB 18"];
+			subgraph cluster_fe17 {
+				graph[color="lavenderblush1",part="fes",femb="17",label=""];
+				"femb18fe1"[part="fe",fe="0",femb="17",label="FE1"];
+				"femb18fe2"[part="fe",fe="1",femb="17",label="FE2"];
+				"femb18fe3"[part="fe",fe="2",femb="17",label="FE3"];
+				"femb18fe4"[part="fe",fe="3",femb="17",label="FE4"];
+				"femb18fe5"[part="fe",fe="4",femb="17",label="FE5"];
+				"femb18fe6"[part="fe",fe="5",femb="17",label="FE6"];
+				"femb18fe7"[part="fe",fe="6",femb="17",label="FE7"];
+				"femb18fe8"[part="fe",fe="7",femb="17",label="FE8"];
+			}
+			subgraph cluster_adc17 {
+				graph[color="lavenderblush1",part="adcs",femb="17",label=""];
+				"femb18adc1"[part="adc",adc="0",femb="17",label="ADC1"];
+				"femb18adc2"[part="adc",adc="1",femb="17",label="ADC2"];
+				"femb18adc3"[part="adc",adc="2",femb="17",label="ADC3"];
+				"femb18adc4"[part="adc",adc="3",femb="17",label="ADC4"];
+				"femb18adc5"[part="adc",adc="4",femb="17",label="ADC5"];
+				"femb18adc6"[part="adc",adc="5",femb="17",label="ADC6"];
+				"femb18adc7"[part="adc",adc="6",femb="17",label="ADC7"];
+				"femb18adc8"[part="adc",adc="7",femb="17",label="ADC8"];
+			}
+			subgraph cluster_tx17 {
+				graph[color="lavenderblush1",part="txs",femb="17",label=""];
+				"femb18tx1"[part="fembtx",tx="0",femb="17",label="tx"];
+				"femb18tx2"[part="fembtx",tx="1",femb="17",label="tx"];
+				"femb18tx3"[part="fembtx",tx="2",femb="17",label="tx"];
+				"femb18tx4"[part="fembtx",tx="3",femb="17",label="tx"];
+			}
+			"femb18fe1" -> "femb18adc1"[];
+			"femb18adc1" -> "femb18tx1"[weight="2.0"];
+			"femb18fe2" -> "femb18adc2"[];
+			"femb18adc2" -> "femb18tx1"[weight="2.0"];
+			"femb18fe3" -> "femb18adc3"[];
+			"femb18adc3" -> "femb18tx2"[weight="2.0"];
+			"femb18fe4" -> "femb18adc4"[];
+			"femb18adc4" -> "femb18tx2"[weight="2.0"];
+			"femb18fe5" -> "femb18adc5"[];
+			"femb18adc5" -> "femb18tx3"[weight="2.0"];
+			"femb18fe6" -> "femb18adc6"[];
+			"femb18adc6" -> "femb18tx3"[weight="2.0"];
+			"femb18fe7" -> "femb18adc7"[];
+			"femb18adc7" -> "femb18tx4"[weight="2.0"];
+			"femb18fe8" -> "femb18adc8"[];
+			"femb18adc8" -> "femb18tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb18 {
+			graph[color="lavenderblush2",part="femb",femb="18",label="FEMB 19"];
+			subgraph cluster_fe18 {
+				graph[color="lavenderblush1",part="fes",femb="18",label=""];
+				"femb19fe1"[part="fe",fe="0",femb="18",label="FE1"];
+				"femb19fe2"[part="fe",fe="1",femb="18",label="FE2"];
+				"femb19fe3"[part="fe",fe="2",femb="18",label="FE3"];
+				"femb19fe4"[part="fe",fe="3",femb="18",label="FE4"];
+				"femb19fe5"[part="fe",fe="4",femb="18",label="FE5"];
+				"femb19fe6"[part="fe",fe="5",femb="18",label="FE6"];
+				"femb19fe7"[part="fe",fe="6",femb="18",label="FE7"];
+				"femb19fe8"[part="fe",fe="7",femb="18",label="FE8"];
+			}
+			subgraph cluster_adc18 {
+				graph[color="lavenderblush1",part="adcs",femb="18",label=""];
+				"femb19adc1"[part="adc",adc="0",femb="18",label="ADC1"];
+				"femb19adc2"[part="adc",adc="1",femb="18",label="ADC2"];
+				"femb19adc3"[part="adc",adc="2",femb="18",label="ADC3"];
+				"femb19adc4"[part="adc",adc="3",femb="18",label="ADC4"];
+				"femb19adc5"[part="adc",adc="4",femb="18",label="ADC5"];
+				"femb19adc6"[part="adc",adc="5",femb="18",label="ADC6"];
+				"femb19adc7"[part="adc",adc="6",femb="18",label="ADC7"];
+				"femb19adc8"[part="adc",adc="7",femb="18",label="ADC8"];
+			}
+			subgraph cluster_tx18 {
+				graph[color="lavenderblush1",part="txs",femb="18",label=""];
+				"femb19tx1"[part="fembtx",tx="0",femb="18",label="tx"];
+				"femb19tx2"[part="fembtx",tx="1",femb="18",label="tx"];
+				"femb19tx3"[part="fembtx",tx="2",femb="18",label="tx"];
+				"femb19tx4"[part="fembtx",tx="3",femb="18",label="tx"];
+			}
+			"femb19fe1" -> "femb19adc1"[];
+			"femb19adc1" -> "femb19tx1"[weight="2.0"];
+			"femb19fe2" -> "femb19adc2"[];
+			"femb19adc2" -> "femb19tx1"[weight="2.0"];
+			"femb19fe3" -> "femb19adc3"[];
+			"femb19adc3" -> "femb19tx2"[weight="2.0"];
+			"femb19fe4" -> "femb19adc4"[];
+			"femb19adc4" -> "femb19tx2"[weight="2.0"];
+			"femb19fe5" -> "femb19adc5"[];
+			"femb19adc5" -> "femb19tx3"[weight="2.0"];
+			"femb19fe6" -> "femb19adc6"[];
+			"femb19adc6" -> "femb19tx3"[weight="2.0"];
+			"femb19fe7" -> "femb19adc7"[];
+			"femb19adc7" -> "femb19tx4"[weight="2.0"];
+			"femb19fe8" -> "femb19adc8"[];
+			"femb19adc8" -> "femb19tx4"[weight="2.0"];
+		}
+		subgraph cluster_femb19 {
+			graph[color="lavenderblush2",part="femb",femb="19",label="FEMB 20"];
+			subgraph cluster_fe19 {
+				graph[color="lavenderblush1",part="fes",femb="19",label=""];
+				"femb20fe1"[part="fe",fe="0",femb="19",label="FE1"];
+				"femb20fe2"[part="fe",fe="1",femb="19",label="FE2"];
+				"femb20fe3"[part="fe",fe="2",femb="19",label="FE3"];
+				"femb20fe4"[part="fe",fe="3",femb="19",label="FE4"];
+				"femb20fe5"[part="fe",fe="4",femb="19",label="FE5"];
+				"femb20fe6"[part="fe",fe="5",femb="19",label="FE6"];
+				"femb20fe7"[part="fe",fe="6",femb="19",label="FE7"];
+				"femb20fe8"[part="fe",fe="7",femb="19",label="FE8"];
+			}
+			subgraph cluster_adc19 {
+				graph[color="lavenderblush1",part="adcs",femb="19",label=""];
+				"femb20adc1"[part="adc",adc="0",femb="19",label="ADC1"];
+				"femb20adc2"[part="adc",adc="1",femb="19",label="ADC2"];
+				"femb20adc3"[part="adc",adc="2",femb="19",label="ADC3"];
+				"femb20adc4"[part="adc",adc="3",femb="19",label="ADC4"];
+				"femb20adc5"[part="adc",adc="4",femb="19",label="ADC5"];
+				"femb20adc6"[part="adc",adc="5",femb="19",label="ADC6"];
+				"femb20adc7"[part="adc",adc="6",femb="19",label="ADC7"];
+				"femb20adc8"[part="adc",adc="7",femb="19",label="ADC8"];
+			}
+			subgraph cluster_tx19 {
+				graph[color="lavenderblush1",part="txs",femb="19",label=""];
+				"femb20tx1"[part="fembtx",tx="0",femb="19",label="tx"];
+				"femb20tx2"[part="fembtx",tx="1",femb="19",label="tx"];
+				"femb20tx3"[part="fembtx",tx="2",femb="19",label="tx"];
+				"femb20tx4"[part="fembtx",tx="3",femb="19",label="tx"];
+			}
+			"femb20fe1" -> "femb20adc1"[];
+			"femb20adc1" -> "femb20tx1"[weight="2.0"];
+			"femb20fe2" -> "femb20adc2"[];
+			"femb20adc2" -> "femb20tx1"[weight="2.0"];
+			"femb20fe3" -> "femb20adc3"[];
+			"femb20adc3" -> "femb20tx2"[weight="2.0"];
+			"femb20fe4" -> "femb20adc4"[];
+			"femb20adc4" -> "femb20tx2"[weight="2.0"];
+			"femb20fe5" -> "femb20adc5"[];
+			"femb20adc5" -> "femb20tx3"[weight="2.0"];
+			"femb20fe6" -> "femb20adc6"[];
+			"femb20adc6" -> "femb20tx3"[weight="2.0"];
+			"femb20fe7" -> "femb20adc7"[];
+			"femb20adc7" -> "femb20tx4"[weight="2.0"];
+			"femb20fe8" -> "femb20adc8"[];
+			"femb20adc8" -> "femb20tx4"[weight="2.0"];
+		}
+	}
+	subgraph cluster_warm {
+		graph[label="Warm"];
+		subgraph cluster_wib0 {
+			graph[color="seashell2",part="wib",wib="0",label="WIB1"];
+			subgraph cluster_wib0uplink {
+				graph[color="seashell",part="txs",wib="0",label="uplinks"];
+				"wib0tx0"[part="wibtx",wib="0",tx="0",label="tx"];
+				"wib0tx1"[part="wibtx",wib="0",tx="1",label="tx"];
+			}
+			subgraph cluster_wib0conn0 {
+				graph[color="seashell",part="wibconn",label="Connector 1",wibconn="0"];
+				"wib1conn1fi1"[wibconnrx="0",part="wibconnrx",wib="0",conn="0",label="rx1"];
+				"wib1conn1fi2"[wibconnrx="1",part="wibconnrx",wib="0",conn="0",label="rx2"];
+				"wib1conn1fi3"[wibconnrx="2",part="wibconnrx",wib="0",conn="0",label="rx3"];
+				"wib1conn1fi4"[wibconnrx="3",part="wibconnrx",wib="0",conn="0",label="rx4"];
+			}
+			subgraph cluster_wib0conn1 {
+				graph[color="seashell",part="wibconn",label="Connector 2",wibconn="1"];
+				"wib1conn2fi1"[wibconnrx="0",part="wibconnrx",wib="0",conn="1",label="rx1"];
+				"wib1conn2fi2"[wibconnrx="1",part="wibconnrx",wib="0",conn="1",label="rx2"];
+				"wib1conn2fi3"[wibconnrx="2",part="wibconnrx",wib="0",conn="1",label="rx3"];
+				"wib1conn2fi4"[wibconnrx="3",part="wibconnrx",wib="0",conn="1",label="rx4"];
+			}
+			subgraph cluster_wib0conn2 {
+				graph[color="seashell",part="wibconn",label="Connector 3",wibconn="2"];
+				"wib1conn3fi1"[wibconnrx="0",part="wibconnrx",wib="0",conn="2",label="rx1"];
+				"wib1conn3fi2"[wibconnrx="1",part="wibconnrx",wib="0",conn="2",label="rx2"];
+				"wib1conn3fi3"[wibconnrx="2",part="wibconnrx",wib="0",conn="2",label="rx3"];
+				"wib1conn3fi4"[wibconnrx="3",part="wibconnrx",wib="0",conn="2",label="rx4"];
+			}
+			subgraph cluster_wib0conn3 {
+				graph[color="seashell",part="wibconn",label="Connector 4",wibconn="3"];
+				"wib1conn4fi1"[wibconnrx="0",part="wibconnrx",wib="0",conn="3",label="rx1"];
+				"wib1conn4fi2"[wibconnrx="1",part="wibconnrx",wib="0",conn="3",label="rx2"];
+				"wib1conn4fi3"[wibconnrx="2",part="wibconnrx",wib="0",conn="3",label="rx3"];
+				"wib1conn4fi4"[wibconnrx="3",part="wibconnrx",wib="0",conn="3",label="rx4"];
+			}
+		}
+		"wib1conn1fi1" -> "wib0tx0"[weight="20"];
+		"wib1conn1fi2" -> "wib0tx0"[weight="20"];
+		"wib1conn1fi3" -> "wib0tx0"[weight="20"];
+		"wib1conn1fi4" -> "wib0tx0"[weight="20"];
+		"wib1conn2fi1" -> "wib0tx0"[weight="20"];
+		"wib1conn2fi2" -> "wib0tx0"[weight="20"];
+		"wib1conn2fi3" -> "wib0tx0"[weight="20"];
+		"wib1conn2fi4" -> "wib0tx0"[weight="20"];
+		"wib1conn3fi1" -> "wib0tx1"[weight="20"];
+		"wib1conn3fi2" -> "wib0tx1"[weight="20"];
+		"wib1conn3fi3" -> "wib0tx1"[weight="20"];
+		"wib1conn3fi4" -> "wib0tx1"[weight="20"];
+		"wib1conn4fi1" -> "wib0tx1"[weight="20"];
+		"wib1conn4fi2" -> "wib0tx1"[weight="20"];
+		"wib1conn4fi3" -> "wib0tx1"[weight="20"];
+		"wib1conn4fi4" -> "wib0tx1"[weight="20"];
+		subgraph cluster_wib1 {
+			graph[color="seashell2",part="wib",wib="1",label="WIB2"];
+			subgraph cluster_wib1uplink {
+				graph[color="seashell",part="txs",wib="1",label="uplinks"];
+				"wib1tx0"[part="wibtx",wib="1",tx="0",label="tx"];
+				"wib1tx1"[part="wibtx",wib="1",tx="1",label="tx"];
+			}
+			subgraph cluster_wib1conn0 {
+				graph[color="seashell",part="wibconn",label="Connector 1",wibconn="0"];
+				"wib2conn1fi1"[wibconnrx="0",part="wibconnrx",wib="1",conn="0",label="rx1"];
+				"wib2conn1fi2"[wibconnrx="1",part="wibconnrx",wib="1",conn="0",label="rx2"];
+				"wib2conn1fi3"[wibconnrx="2",part="wibconnrx",wib="1",conn="0",label="rx3"];
+				"wib2conn1fi4"[wibconnrx="3",part="wibconnrx",wib="1",conn="0",label="rx4"];
+			}
+			subgraph cluster_wib1conn1 {
+				graph[color="seashell",part="wibconn",label="Connector 2",wibconn="1"];
+				"wib2conn2fi1"[wibconnrx="0",part="wibconnrx",wib="1",conn="1",label="rx1"];
+				"wib2conn2fi2"[wibconnrx="1",part="wibconnrx",wib="1",conn="1",label="rx2"];
+				"wib2conn2fi3"[wibconnrx="2",part="wibconnrx",wib="1",conn="1",label="rx3"];
+				"wib2conn2fi4"[wibconnrx="3",part="wibconnrx",wib="1",conn="1",label="rx4"];
+			}
+			subgraph cluster_wib1conn2 {
+				graph[color="seashell",part="wibconn",label="Connector 3",wibconn="2"];
+				"wib2conn3fi1"[wibconnrx="0",part="wibconnrx",wib="1",conn="2",label="rx1"];
+				"wib2conn3fi2"[wibconnrx="1",part="wibconnrx",wib="1",conn="2",label="rx2"];
+				"wib2conn3fi3"[wibconnrx="2",part="wibconnrx",wib="1",conn="2",label="rx3"];
+				"wib2conn3fi4"[wibconnrx="3",part="wibconnrx",wib="1",conn="2",label="rx4"];
+			}
+			subgraph cluster_wib1conn3 {
+				graph[color="seashell",part="wibconn",label="Connector 4",wibconn="3"];
+				"wib2conn4fi1"[wibconnrx="0",part="wibconnrx",wib="1",conn="3",label="rx1"];
+				"wib2conn4fi2"[wibconnrx="1",part="wibconnrx",wib="1",conn="3",label="rx2"];
+				"wib2conn4fi3"[wibconnrx="2",part="wibconnrx",wib="1",conn="3",label="rx3"];
+				"wib2conn4fi4"[wibconnrx="3",part="wibconnrx",wib="1",conn="3",label="rx4"];
+			}
+		}
+		"wib2conn1fi1" -> "wib1tx0"[weight="20"];
+		"wib2conn1fi2" -> "wib1tx0"[weight="20"];
+		"wib2conn1fi3" -> "wib1tx0"[weight="20"];
+		"wib2conn1fi4" -> "wib1tx0"[weight="20"];
+		"wib2conn2fi1" -> "wib1tx0"[weight="20"];
+		"wib2conn2fi2" -> "wib1tx0"[weight="20"];
+		"wib2conn2fi3" -> "wib1tx0"[weight="20"];
+		"wib2conn2fi4" -> "wib1tx0"[weight="20"];
+		"wib2conn3fi1" -> "wib1tx1"[weight="20"];
+		"wib2conn3fi2" -> "wib1tx1"[weight="20"];
+		"wib2conn3fi3" -> "wib1tx1"[weight="20"];
+		"wib2conn3fi4" -> "wib1tx1"[weight="20"];
+		"wib2conn4fi1" -> "wib1tx1"[weight="20"];
+		"wib2conn4fi2" -> "wib1tx1"[weight="20"];
+		"wib2conn4fi3" -> "wib1tx1"[weight="20"];
+		"wib2conn4fi4" -> "wib1tx1"[weight="20"];
+		subgraph cluster_wib2 {
+			graph[color="seashell2",part="wib",wib="2",label="WIB3"];
+			subgraph cluster_wib2uplink {
+				graph[color="seashell",part="txs",wib="2",label="uplinks"];
+				"wib2tx0"[part="wibtx",wib="2",tx="0",label="tx"];
+				"wib2tx1"[part="wibtx",wib="2",tx="1",label="tx"];
+			}
+			subgraph cluster_wib2conn0 {
+				graph[color="seashell",part="wibconn",label="Connector 1",wibconn="0"];
+				"wib3conn1fi1"[wibconnrx="0",part="wibconnrx",wib="2",conn="0",label="rx1"];
+				"wib3conn1fi2"[wibconnrx="1",part="wibconnrx",wib="2",conn="0",label="rx2"];
+				"wib3conn1fi3"[wibconnrx="2",part="wibconnrx",wib="2",conn="0",label="rx3"];
+				"wib3conn1fi4"[wibconnrx="3",part="wibconnrx",wib="2",conn="0",label="rx4"];
+			}
+			subgraph cluster_wib2conn1 {
+				graph[color="seashell",part="wibconn",label="Connector 2",wibconn="1"];
+				"wib3conn2fi1"[wibconnrx="0",part="wibconnrx",wib="2",conn="1",label="rx1"];
+				"wib3conn2fi2"[wibconnrx="1",part="wibconnrx",wib="2",conn="1",label="rx2"];
+				"wib3conn2fi3"[wibconnrx="2",part="wibconnrx",wib="2",conn="1",label="rx3"];
+				"wib3conn2fi4"[wibconnrx="3",part="wibconnrx",wib="2",conn="1",label="rx4"];
+			}
+			subgraph cluster_wib2conn2 {
+				graph[color="seashell",part="wibconn",label="Connector 3",wibconn="2"];
+				"wib3conn3fi1"[wibconnrx="0",part="wibconnrx",wib="2",conn="2",label="rx1"];
+				"wib3conn3fi2"[wibconnrx="1",part="wibconnrx",wib="2",conn="2",label="rx2"];
+				"wib3conn3fi3"[wibconnrx="2",part="wibconnrx",wib="2",conn="2",label="rx3"];
+				"wib3conn3fi4"[wibconnrx="3",part="wibconnrx",wib="2",conn="2",label="rx4"];
+			}
+			subgraph cluster_wib2conn3 {
+				graph[color="seashell",part="wibconn",label="Connector 4",wibconn="3"];
+				"wib3conn4fi1"[wibconnrx="0",part="wibconnrx",wib="2",conn="3",label="rx1"];
+				"wib3conn4fi2"[wibconnrx="1",part="wibconnrx",wib="2",conn="3",label="rx2"];
+				"wib3conn4fi3"[wibconnrx="2",part="wibconnrx",wib="2",conn="3",label="rx3"];
+				"wib3conn4fi4"[wibconnrx="3",part="wibconnrx",wib="2",conn="3",label="rx4"];
+			}
+		}
+		"wib3conn1fi1" -> "wib2tx0"[weight="20"];
+		"wib3conn1fi2" -> "wib2tx0"[weight="20"];
+		"wib3conn1fi3" -> "wib2tx0"[weight="20"];
+		"wib3conn1fi4" -> "wib2tx0"[weight="20"];
+		"wib3conn2fi1" -> "wib2tx0"[weight="20"];
+		"wib3conn2fi2" -> "wib2tx0"[weight="20"];
+		"wib3conn2fi3" -> "wib2tx0"[weight="20"];
+		"wib3conn2fi4" -> "wib2tx0"[weight="20"];
+		"wib3conn3fi1" -> "wib2tx1"[weight="20"];
+		"wib3conn3fi2" -> "wib2tx1"[weight="20"];
+		"wib3conn3fi3" -> "wib2tx1"[weight="20"];
+		"wib3conn3fi4" -> "wib2tx1"[weight="20"];
+		"wib3conn4fi1" -> "wib2tx1"[weight="20"];
+		"wib3conn4fi2" -> "wib2tx1"[weight="20"];
+		"wib3conn4fi3" -> "wib2tx1"[weight="20"];
+		"wib3conn4fi4" -> "wib2tx1"[weight="20"];
+		subgraph cluster_wib3 {
+			graph[color="seashell2",part="wib",wib="3",label="WIB4"];
+			subgraph cluster_wib3uplink {
+				graph[color="seashell",part="txs",wib="3",label="uplinks"];
+				"wib3tx0"[part="wibtx",wib="3",tx="0",label="tx"];
+				"wib3tx1"[part="wibtx",wib="3",tx="1",label="tx"];
+			}
+			subgraph cluster_wib3conn0 {
+				graph[color="seashell",part="wibconn",label="Connector 1",wibconn="0"];
+				"wib4conn1fi1"[wibconnrx="0",part="wibconnrx",wib="3",conn="0",label="rx1"];
+				"wib4conn1fi2"[wibconnrx="1",part="wibconnrx",wib="3",conn="0",label="rx2"];
+				"wib4conn1fi3"[wibconnrx="2",part="wibconnrx",wib="3",conn="0",label="rx3"];
+				"wib4conn1fi4"[wibconnrx="3",part="wibconnrx",wib="3",conn="0",label="rx4"];
+			}
+			subgraph cluster_wib3conn1 {
+				graph[color="seashell",part="wibconn",label="Connector 2",wibconn="1"];
+				"wib4conn2fi1"[wibconnrx="0",part="wibconnrx",wib="3",conn="1",label="rx1"];
+				"wib4conn2fi2"[wibconnrx="1",part="wibconnrx",wib="3",conn="1",label="rx2"];
+				"wib4conn2fi3"[wibconnrx="2",part="wibconnrx",wib="3",conn="1",label="rx3"];
+				"wib4conn2fi4"[wibconnrx="3",part="wibconnrx",wib="3",conn="1",label="rx4"];
+			}
+			subgraph cluster_wib3conn2 {
+				graph[color="seashell",part="wibconn",label="Connector 3",wibconn="2"];
+				"wib4conn3fi1"[wibconnrx="0",part="wibconnrx",wib="3",conn="2",label="rx1"];
+				"wib4conn3fi2"[wibconnrx="1",part="wibconnrx",wib="3",conn="2",label="rx2"];
+				"wib4conn3fi3"[wibconnrx="2",part="wibconnrx",wib="3",conn="2",label="rx3"];
+				"wib4conn3fi4"[wibconnrx="3",part="wibconnrx",wib="3",conn="2",label="rx4"];
+			}
+			subgraph cluster_wib3conn3 {
+				graph[color="seashell",part="wibconn",label="Connector 4",wibconn="3"];
+				"wib4conn4fi1"[wibconnrx="0",part="wibconnrx",wib="3",conn="3",label="rx1"];
+				"wib4conn4fi2"[wibconnrx="1",part="wibconnrx",wib="3",conn="3",label="rx2"];
+				"wib4conn4fi3"[wibconnrx="2",part="wibconnrx",wib="3",conn="3",label="rx3"];
+				"wib4conn4fi4"[wibconnrx="3",part="wibconnrx",wib="3",conn="3",label="rx4"];
+			}
+		}
+		"wib4conn1fi1" -> "wib3tx0"[weight="20"];
+		"wib4conn1fi2" -> "wib3tx0"[weight="20"];
+		"wib4conn1fi3" -> "wib3tx0"[weight="20"];
+		"wib4conn1fi4" -> "wib3tx0"[weight="20"];
+		"wib4conn2fi1" -> "wib3tx0"[weight="20"];
+		"wib4conn2fi2" -> "wib3tx0"[weight="20"];
+		"wib4conn2fi3" -> "wib3tx0"[weight="20"];
+		"wib4conn2fi4" -> "wib3tx0"[weight="20"];
+		"wib4conn3fi1" -> "wib3tx1"[weight="20"];
+		"wib4conn3fi2" -> "wib3tx1"[weight="20"];
+		"wib4conn3fi3" -> "wib3tx1"[weight="20"];
+		"wib4conn3fi4" -> "wib3tx1"[weight="20"];
+		"wib4conn4fi1" -> "wib3tx1"[weight="20"];
+		"wib4conn4fi2" -> "wib3tx1"[weight="20"];
+		"wib4conn4fi3" -> "wib3tx1"[weight="20"];
+		"wib4conn4fi4" -> "wib3tx1"[weight="20"];
+		subgraph cluster_wib4 {
+			graph[color="seashell2",part="wib",wib="4",label="WIB5"];
+			subgraph cluster_wib4uplink {
+				graph[color="seashell",part="txs",wib="4",label="uplinks"];
+				"wib4tx0"[part="wibtx",wib="4",tx="0",label="tx"];
+				"wib4tx1"[part="wibtx",wib="4",tx="1",label="tx"];
+			}
+			subgraph cluster_wib4conn0 {
+				graph[color="seashell",part="wibconn",label="Connector 1",wibconn="0"];
+				"wib5conn1fi1"[wibconnrx="0",part="wibconnrx",wib="4",conn="0",label="rx1"];
+				"wib5conn1fi2"[wibconnrx="1",part="wibconnrx",wib="4",conn="0",label="rx2"];
+				"wib5conn1fi3"[wibconnrx="2",part="wibconnrx",wib="4",conn="0",label="rx3"];
+				"wib5conn1fi4"[wibconnrx="3",part="wibconnrx",wib="4",conn="0",label="rx4"];
+			}
+			subgraph cluster_wib4conn1 {
+				graph[color="seashell",part="wibconn",label="Connector 2",wibconn="1"];
+				"wib5conn2fi1"[wibconnrx="0",part="wibconnrx",wib="4",conn="1",label="rx1"];
+				"wib5conn2fi2"[wibconnrx="1",part="wibconnrx",wib="4",conn="1",label="rx2"];
+				"wib5conn2fi3"[wibconnrx="2",part="wibconnrx",wib="4",conn="1",label="rx3"];
+				"wib5conn2fi4"[wibconnrx="3",part="wibconnrx",wib="4",conn="1",label="rx4"];
+			}
+			subgraph cluster_wib4conn2 {
+				graph[color="seashell",part="wibconn",label="Connector 3",wibconn="2"];
+				"wib5conn3fi1"[wibconnrx="0",part="wibconnrx",wib="4",conn="2",label="rx1"];
+				"wib5conn3fi2"[wibconnrx="1",part="wibconnrx",wib="4",conn="2",label="rx2"];
+				"wib5conn3fi3"[wibconnrx="2",part="wibconnrx",wib="4",conn="2",label="rx3"];
+				"wib5conn3fi4"[wibconnrx="3",part="wibconnrx",wib="4",conn="2",label="rx4"];
+			}
+			subgraph cluster_wib4conn3 {
+				graph[color="seashell",part="wibconn",label="Connector 4",wibconn="3"];
+				"wib5conn4fi1"[wibconnrx="0",part="wibconnrx",wib="4",conn="3",label="rx1"];
+				"wib5conn4fi2"[wibconnrx="1",part="wibconnrx",wib="4",conn="3",label="rx2"];
+				"wib5conn4fi3"[wibconnrx="2",part="wibconnrx",wib="4",conn="3",label="rx3"];
+				"wib5conn4fi4"[wibconnrx="3",part="wibconnrx",wib="4",conn="3",label="rx4"];
+			}
+		}
+		"wib5conn1fi1" -> "wib4tx0"[weight="20"];
+		"wib5conn1fi2" -> "wib4tx0"[weight="20"];
+		"wib5conn1fi3" -> "wib4tx0"[weight="20"];
+		"wib5conn1fi4" -> "wib4tx0"[weight="20"];
+		"wib5conn2fi1" -> "wib4tx0"[weight="20"];
+		"wib5conn2fi2" -> "wib4tx0"[weight="20"];
+		"wib5conn2fi3" -> "wib4tx0"[weight="20"];
+		"wib5conn2fi4" -> "wib4tx0"[weight="20"];
+		"wib5conn3fi1" -> "wib4tx1"[weight="20"];
+		"wib5conn3fi2" -> "wib4tx1"[weight="20"];
+		"wib5conn3fi3" -> "wib4tx1"[weight="20"];
+		"wib5conn3fi4" -> "wib4tx1"[weight="20"];
+		"wib5conn4fi1" -> "wib4tx1"[weight="20"];
+		"wib5conn4fi2" -> "wib4tx1"[weight="20"];
+		"wib5conn4fi3" -> "wib4tx1"[weight="20"];
+		"wib5conn4fi4" -> "wib4tx1"[weight="20"];
+	}
+	subgraph cluster_daq {
+		graph[label="APA DAQ Fragment"];
+		subgraph cluster_felix {
+			graph[color="skyblue2",label="FELIX"];
+			"felixinput 1"[felixinput="0",part="felixinput"];
+			"felixinput 2"[felixinput="1",part="felixinput"];
+			"felixinput 3"[felixinput="2",part="felixinput"];
+			"felixinput 4"[felixinput="3",part="felixinput"];
+			"felixinput 5"[felixinput="4",part="felixinput"];
+			"felixinput 6"[felixinput="5",part="felixinput"];
+			"felixinput 7"[felixinput="6",part="felixinput"];
+			"felixinput 8"[felixinput="7",part="felixinput"];
+			"felixinput 9"[felixinput="8",part="felixinput"];
+			"felixinput10"[felixinput="9",part="felixinput"];
+		}
+	}
+	"femb1tx1" -> "wib1conn1fi1"[label="1 Gbps"];
+	"femb1tx2" -> "wib1conn1fi2"[label="1 Gbps"];
+	"femb1tx3" -> "wib1conn1fi3"[label="1 Gbps"];
+	"femb1tx4" -> "wib1conn1fi4"[label="1 Gbps"];
+	"femb2tx1" -> "wib2conn1fi1"[label="1 Gbps"];
+	"femb2tx2" -> "wib2conn1fi2"[label="1 Gbps"];
+	"femb2tx3" -> "wib2conn1fi3"[label="1 Gbps"];
+	"femb2tx4" -> "wib2conn1fi4"[label="1 Gbps"];
+	"femb3tx1" -> "wib3conn1fi1"[label="1 Gbps"];
+	"femb3tx2" -> "wib3conn1fi2"[label="1 Gbps"];
+	"femb3tx3" -> "wib3conn1fi3"[label="1 Gbps"];
+	"femb3tx4" -> "wib3conn1fi4"[label="1 Gbps"];
+	"femb4tx1" -> "wib4conn1fi1"[label="1 Gbps"];
+	"femb4tx2" -> "wib4conn1fi2"[label="1 Gbps"];
+	"femb4tx3" -> "wib4conn1fi3"[label="1 Gbps"];
+	"femb4tx4" -> "wib4conn1fi4"[label="1 Gbps"];
+	"femb5tx1" -> "wib5conn1fi1"[label="1 Gbps"];
+	"femb5tx2" -> "wib5conn1fi2"[label="1 Gbps"];
+	"femb5tx3" -> "wib5conn1fi3"[label="1 Gbps"];
+	"femb5tx4" -> "wib5conn1fi4"[label="1 Gbps"];
+	"femb6tx1" -> "wib1conn2fi1"[label="1 Gbps"];
+	"femb6tx2" -> "wib1conn2fi2"[label="1 Gbps"];
+	"femb6tx3" -> "wib1conn2fi3"[label="1 Gbps"];
+	"femb6tx4" -> "wib1conn2fi4"[label="1 Gbps"];
+	"femb7tx1" -> "wib2conn2fi1"[label="1 Gbps"];
+	"femb7tx2" -> "wib2conn2fi2"[label="1 Gbps"];
+	"femb7tx3" -> "wib2conn2fi3"[label="1 Gbps"];
+	"femb7tx4" -> "wib2conn2fi4"[label="1 Gbps"];
+	"femb8tx1" -> "wib3conn2fi1"[label="1 Gbps"];
+	"femb8tx2" -> "wib3conn2fi2"[label="1 Gbps"];
+	"femb8tx3" -> "wib3conn2fi3"[label="1 Gbps"];
+	"femb8tx4" -> "wib3conn2fi4"[label="1 Gbps"];
+	"femb9tx1" -> "wib4conn2fi1"[label="1 Gbps"];
+	"femb9tx2" -> "wib4conn2fi2"[label="1 Gbps"];
+	"femb9tx3" -> "wib4conn2fi3"[label="1 Gbps"];
+	"femb9tx4" -> "wib4conn2fi4"[label="1 Gbps"];
+	"femb10tx1" -> "wib5conn2fi1"[label="1 Gbps"];
+	"femb10tx2" -> "wib5conn2fi2"[label="1 Gbps"];
+	"femb10tx3" -> "wib5conn2fi3"[label="1 Gbps"];
+	"femb10tx4" -> "wib5conn2fi4"[label="1 Gbps"];
+	"femb11tx1" -> "wib1conn3fi1"[label="1 Gbps"];
+	"femb11tx2" -> "wib1conn3fi2"[label="1 Gbps"];
+	"femb11tx3" -> "wib1conn3fi3"[label="1 Gbps"];
+	"femb11tx4" -> "wib1conn3fi4"[label="1 Gbps"];
+	"femb12tx1" -> "wib2conn3fi1"[label="1 Gbps"];
+	"femb12tx2" -> "wib2conn3fi2"[label="1 Gbps"];
+	"femb12tx3" -> "wib2conn3fi3"[label="1 Gbps"];
+	"femb12tx4" -> "wib2conn3fi4"[label="1 Gbps"];
+	"femb13tx1" -> "wib3conn3fi1"[label="1 Gbps"];
+	"femb13tx2" -> "wib3conn3fi2"[label="1 Gbps"];
+	"femb13tx3" -> "wib3conn3fi3"[label="1 Gbps"];
+	"femb13tx4" -> "wib3conn3fi4"[label="1 Gbps"];
+	"femb14tx1" -> "wib4conn3fi1"[label="1 Gbps"];
+	"femb14tx2" -> "wib4conn3fi2"[label="1 Gbps"];
+	"femb14tx3" -> "wib4conn3fi3"[label="1 Gbps"];
+	"femb14tx4" -> "wib4conn3fi4"[label="1 Gbps"];
+	"femb15tx1" -> "wib5conn3fi1"[label="1 Gbps"];
+	"femb15tx2" -> "wib5conn3fi2"[label="1 Gbps"];
+	"femb15tx3" -> "wib5conn3fi3"[label="1 Gbps"];
+	"femb15tx4" -> "wib5conn3fi4"[label="1 Gbps"];
+	"femb16tx1" -> "wib1conn4fi1"[label="1 Gbps"];
+	"femb16tx2" -> "wib1conn4fi2"[label="1 Gbps"];
+	"femb16tx3" -> "wib1conn4fi3"[label="1 Gbps"];
+	"femb16tx4" -> "wib1conn4fi4"[label="1 Gbps"];
+	"femb17tx1" -> "wib2conn4fi1"[label="1 Gbps"];
+	"femb17tx2" -> "wib2conn4fi2"[label="1 Gbps"];
+	"femb17tx3" -> "wib2conn4fi3"[label="1 Gbps"];
+	"femb17tx4" -> "wib2conn4fi4"[label="1 Gbps"];
+	"femb18tx1" -> "wib3conn4fi1"[label="1 Gbps"];
+	"femb18tx2" -> "wib3conn4fi2"[label="1 Gbps"];
+	"femb18tx3" -> "wib3conn4fi3"[label="1 Gbps"];
+	"femb18tx4" -> "wib3conn4fi4"[label="1 Gbps"];
+	"femb19tx1" -> "wib4conn4fi1"[label="1 Gbps"];
+	"femb19tx2" -> "wib4conn4fi2"[label="1 Gbps"];
+	"femb19tx3" -> "wib4conn4fi3"[label="1 Gbps"];
+	"femb19tx4" -> "wib4conn4fi4"[label="1 Gbps"];
+	"femb20tx1" -> "wib5conn4fi1"[label="1 Gbps"];
+	"femb20tx2" -> "wib5conn4fi2"[label="1 Gbps"];
+	"femb20tx3" -> "wib5conn4fi3"[label="1 Gbps"];
+	"femb20tx4" -> "wib5conn4fi4"[label="1 Gbps"];
+	"wib0tx0" -> "felixinput 1"[label="10 Gbps",penwidth="10"];
+	"wib0tx1" -> "felixinput 2"[label="10 Gbps",penwidth="10"];
+	"wib1tx0" -> "felixinput 3"[label="10 Gbps",penwidth="10"];
+	"wib1tx1" -> "felixinput 4"[label="10 Gbps",penwidth="10"];
+	"wib2tx0" -> "felixinput 5"[label="10 Gbps",penwidth="10"];
+	"wib2tx1" -> "felixinput 6"[label="10 Gbps",penwidth="10"];
+	"wib3tx0" -> "felixinput 7"[label="10 Gbps",penwidth="10"];
+	"wib3tx1" -> "felixinput 8"[label="10 Gbps",penwidth="10"];
+	"wib4tx0" -> "felixinput 9"[label="10 Gbps",penwidth="10"];
+	"wib4tx1" -> "felixinput10"[label="10 Gbps",penwidth="10"];
+}

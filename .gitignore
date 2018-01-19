@@ -1,0 +1,8 @@
+*~
+*.pdf
+*.svg
+*.png
+venv*
+*.gv
+auto
+*.tex

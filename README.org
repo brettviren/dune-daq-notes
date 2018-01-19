@@ -1,0 +1,29 @@
+Some DUNE Far Detector DAQ Notes
+
+* Caveat
+
+These are all conceptual works in progress and not necessarily correct, precise or "official" in any way.
+
+* Mechanics
+
+** Documents
+
+The notes are largely written in Emacs org-mode.  
+
+It may be convenient to export them to PDF.  To do so, visit the =.org= file in any recent Emacs and hit =C-c C-e l p=.
+
+** Figures
+
+The graph figures make use of GraphViz.  They can be generated with
+
+#+BEGIN_EXAMPLE
+dot -Tpdf -o <filename>.pdf <filename>.dot
+#+END_EXAMPLE
+
+While editing them them it may be convenient to use
+
+#+BEGIN_EXAMPLE
+./watchdot <filename>.dot
+#+END_EXAMPLE
+
+This script may need local adjustment to your environment.

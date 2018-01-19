@@ -1,0 +1,155 @@
+digraph felixcpu {
+        node [style="rounded,filled",color=black,shape=box,fillcolor=white];
+        graph [style=filled, splines=line, overlap=false];
+
+        subgraph cluster_ce {
+                label="Cold Electronics";
+                graph[color=darkorange1];
+                subgraph cluster_ceapa {
+                        label="APA i";
+                        graph[color=darkorange];
+                        WIB[label="...WIBs"];
+                }
+        }
+
+        subgraph cluster_daq {
+                label="Single-Phase DAQ Option (FELIX CPU Pipeline) Data and Trigger Flow (1 APA shown)";
+                labelloc=bottom;
+                graph[color=deeppink4];                
+
+               trig[shape=diamond,label="Single-Phase\nModule-Level\nTrigger Logic"];
+                pds[label="APA i\nPDS"];
+
+                subgraph cluster_apa {
+                        label="One APA DAQ Partition";
+                        graph[color=deeppink3];
+
+                        subgraph cluster_apapc {
+                                graph[color=deeppink2];
+                                label="APA PC";
+
+                                subgraph cluster_pipe1 {
+                                        graph[color=deeppink1];
+                                        label="FELIX FPGA";
+                                        felix[label="Front End\nData Receiver"];
+                                        form[label="format\ndata",group=fulldata];
+                                        groupch[label="group\nchannels"];
+                                }
+                                subgraph cluster_cpu1 {
+                                        graph[color=deeppink1];
+                                        label="CPU pipeline 1";
+                                        noise1[label="noise\nmitigation"];
+                                        roi1[label="ROI\nfinding"];
+                                        tp1[label="trigger\nprimitives"];
+                                }
+                                subgraph cluster_cpu2 {
+                                        graph[color=deeppink1];
+                                        label="CPU pipeline 2";
+                                        noise2[label="noise\nmitigation"];
+                                        roi2[label="ROI\nfinding"];
+                                        tp2[label="trigger\nprimitives"];
+                                }
+                                subgraph cluster_cpu3 {
+                                        graph[color=deeppink1];
+                                        label="CPU pipeline 3";
+                                        noise3[label="noise\nmitigation"];
+                                        roi3[label="ROI\nfinding"];
+                                        tp3[label="trigger\nprimitives"];
+                                }
+                                subgraph cluster_cpu4 {
+                                        graph[color=deeppink1];
+                                        label="CPU pipeline 4";
+                                        noise4[label="noise\nmitigation"];
+                                        roi4[label="ROI\nfinding"];
+                                        tp4[label="trigger\nprimitives"];
+                                }
+
+                                buf[shape=circle,label="~10s RAM\nring buffer\n(Lossless)"];
+                                extraction[label="Buffer Extraction\nProcess"];
+                                snb[label="SNB dump\nbuffer\n(SSD/RAM)"];
+                                sel[label="Selection buffer\n(Lossy, RAM)"];
+                                ro[shape=hexagon,label="Apply Trigger\nCommand"];
+                                br[label="Board Reader",group=artdaq];
+
+                                {rank=same extraction, ro}
+                                {rank=same snb, sel}
+                        }
+                }
+                subgraph cluster_eb {
+                        label="Single-Phase\nEgress Processing\nsystem";
+                        graph[color=deeppink1];
+
+                        eb[label="Event Builder...",group=artdaq];
+                }
+        }
+        // Full data
+        edge[penwidth=8];
+
+        WIB->felix[label="  8 x 10 Gbps fiber"];
+
+
+        groupch->buf[label="DMA transfer\nfull data volume"];
+        buf->extraction[label="pull selected"];
+        extraction->snb;
+
+        felix->form;
+        form->groupch[label="960\ncollection\nchannels"];
+
+        // collection plane data
+        edge[penwidth=4];
+        groupch->noise1[label="240 ch"]
+        groupch->noise2[label="240 ch"]
+        groupch->noise3[label="240 ch"]
+        groupch->noise4[label="240 ch"]
+        noise1->roi1->tp1;
+        noise2->roi2->tp2;
+        noise3->roi3->tp3;
+        noise4->roi4->tp4;
+
+        // reduced data
+        edge[pendwidth=2]
+
+        extraction->sel;
+        sel->br[label="all non-SNB\ntriggered\ndata"];
+
+        // per rce collection channel pipeline 
+        edge[penwidth=1];
+
+        // egress
+        br->eb;
+
+        // trickle
+        edge[penwidth=1,style=solid];
+        snb->br[label="trickle\nout"];
+
+        
+
+        // trigger primitive
+        edge[penwidth=1,style=dashed];
+
+        tp1->trig[constraint=false];
+        tp2->trig[constraint=false];
+        tp3->trig[constraint=false];
+        tp4->trig[constraint=false];
+
+        trig->pds[dir=back,taillabel="trigger\nprimitive"];
+       
+
+        // trigger command
+        edge[style=solid];
+
+        trig->ro[taillabel="trigger command"]
+
+
+        ro->extraction[label="trigger\ncommand"];
+
+
+        tp1->ro[constraint=false];
+        tp2->ro[constraint=false];
+        tp3->ro[constraint=false];
+        tp4->ro[constraint=false];
+        
+        // influence layout
+        edge[style=invis];
+
+}

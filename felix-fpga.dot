@@ -1,0 +1,170 @@
+digraph felixcpu {
+        node [style="rounded,filled",color=black,shape=box,fillcolor=white];
+        edge [color=gray40];
+        graph [style=filled, splines=line, overlap=false];
+        subgraph cluster_ce {
+                label="Cold Electronics";
+                graph[color=seashell3];
+                subgraph cluster_ceapa {
+                        label="APA i";
+                        graph[color=seashell];
+                        WIB[label="...WIBs"];
+                }
+        }
+
+        subgraph cluster_globaldaq {
+                graph[color=black, style=solid];                
+                label="DUNE Global DAQ";
+                gt[color=gray80,shape=diamond,label="DUNE\nGlobal Trigger\nLogic Unit"];
+                mon[shape=octagon,label="Monitoring"];
+                
+                
+        subgraph cluster_daq {
+                label="Single-Phase DAQ Option (FELIX FPGA Pipeline) Data and Trigger Flow (1 APA shown)";
+                //labelloc=bottom;
+                graph[style=filled,color=slategray3];                
+                trig[color=gray80,shape=diamond,label="Single-Phase\nModule-Level\nTrigger Logic"];
+                subgraph cluster_daqj {
+                        label="Another APA DAQ Partition"
+                        graph[color=slategray3];
+                        pdsj[label="APA PDS\nprimitives"];
+                        tpcj[label="APA TPC\nprimitives"];
+                }
+                subgraph cluster_apa {
+                        label="One APA DAQ Partition";
+                        graph[color=slategray3];
+
+                        pds[label="APA PDS\nprimitives"];
+
+                        subgraph cluster_apapc {
+                                graph[color=slategray2];
+                                label="APA PC";
+                                subgraph cluster_pipe1 {
+                                        graph[color=slategray1];
+                                        label="FELIX FPGA";
+                                        felix[label="Front End\nData Receiver"];
+                                        form[label="format\ndata"];
+                                        send[label="sender"];
+                                        fpgapipe[label="FPGA\npipeline"];
+                                }
+                                subgraph cluster_cpu1 {
+                                        graph[color=slategray1];
+                                        label="CPU pipeline";
+                                        cpupipe1[label="CPU\nthreaded\npipeline"];
+                                }
+                                subgraph cluster_cpu2 {
+                                        graph[color=slategray1];
+                                        label="CPU pipeline";
+                                        cpupipe2[label="CPU\nthreaded\npipeline"];
+                                }
+                                subgraph cluster_cpu3 {
+                                        graph[color=slategray1];
+                                        label="CPU pipeline";
+                                        cpupipe3[label="CPU\nthreaded\npipeline"];
+                                }
+                                subgraph cluster_cpu4 {
+                                        graph[color=slategray1];
+                                        label="CPU pipeline";
+                                        cpupipe4[label="CPU\nthreaded\npipeline"];
+                                }
+
+
+
+                                buf[shape=circle,label="~10s RAM\nring buffer"];
+                                extraction[label="Buffer Extraction\nProcess"];
+                                snb[label="SNB dump\nbuffer\n(SSD/RAM)"];
+                                sel[label="Selection buffer\n(RAM)"];
+                                ro[shape=hexagon,label="Apply Trigger\nCommand"];
+                                br[label="Board Reader"];
+
+                                {rank=same extraction, ro}
+                                {rank=same snb, sel}
+                        }
+                }
+                subgraph cluster_eb {
+                        label="Single-Phase\nEgress Processing\nsystem";
+                        graph[color=slategray1];
+
+                        eb[label="Event Builder..."];
+                }
+        }
+}
+        pull[style=invis];
+        
+        // Full data
+        edge[penwidth=8];
+
+        WIB->felix[label="  8 x 10 Gbps fiber"];
+
+        form->send[weight=3];
+        send->buf[weight=2,label="      full data volume\n      DMA to ring"];
+        buf->extraction[label="  as selected\nby trigger\ncommand\n  (drains ring)"];
+        extraction->snb;
+
+        felix->form[weight=2, label=" 2560\n  channels"];
+
+        // collection plane data
+        edge[penwidth=4];
+
+        form->fpgapipe[label="960 collection \nchannels"];
+
+        // half-collection plane or reduced data
+        edge[penwidth=2]
+        fpgapipe->cpupipe1[weight=2];
+        fpgapipe->cpupipe2[label="half-collection-plane channels per CPU pipeline"];
+        fpgapipe->cpupipe3;
+        fpgapipe->cpupipe4[];
+
+
+        extraction->sel;
+        sel->br[label="all non-SNB\ntriggered data"];
+        br->eb;
+
+
+        // trickle
+        edge[penwidth=1,style=solid];
+        snb->br[label="trickle\nout"];
+
+        
+        // trigger primitive
+        edge[color=purple,penwidth=1,style=dashed];
+
+
+        trig->pds[dir=back,taillabel="trigger\nprimitives "];
+        trig->pdsj[dir=back];
+        trig->tpcj[dir=back];
+
+       
+        cpupipe1->trig[label="trigger primitives"];
+        cpupipe2->trig[constraint=false];
+        cpupipe3->trig[constraint=false];
+        cpupipe4->trig[constraint=false];
+        
+        trig->gt[constraint=false];
+        
+        // trigger command
+        edge[style=solid];
+        gt->trig:n[constraint=false];
+
+        cpupipe1->ro;
+        cpupipe2->ro;
+        cpupipe3->ro[label="Fast trigger"];
+        cpupipe4->ro;
+        
+
+        trig->ro[taillabel="trigger commands"];
+
+
+        ro->extraction[label="trigger command"];
+
+        edge[color=violetred4,fontcolor=violetred4];
+        send->mon[label="FULL"];
+        mon->extraction[dir=back,label="EMPTY"];
+        
+        // influence layout
+        edge[style=invis];
+        pull->extraction;
+
+        ro->pds
+        
+}
